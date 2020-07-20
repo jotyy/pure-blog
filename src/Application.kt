@@ -23,7 +23,8 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 import router.userRouter
-import top.jotyy.model.Users
+import top.jotyy.model.*
+import javax.xml.crypto.Data
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -67,11 +68,18 @@ fun Application.module(testing: Boolean = false) {
 
 fun initDB() {
     val config = HikariConfig("/hikari.properties")
-    config.schema = "my-blog"
+    config.schema = "pure-blog"
     Database.connect(HikariDataSource(config))
 
     transaction {
         SchemaUtils.create(Users)
+        SchemaUtils.create(Blogs)
+        SchemaUtils.create(Categories)
+        SchemaUtils.create(Tags)
+        SchemaUtils.create(Configs)
+        SchemaUtils.create(Comments)
+        SchemaUtils.create(Links)
+        SchemaUtils.create(Relations)
     }
 }
 

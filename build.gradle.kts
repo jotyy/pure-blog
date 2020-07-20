@@ -45,6 +45,7 @@ dependencies {
     implementation("io.ktor:ktor-client-logging-jvm:$ktor_version")
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-jodatime:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
     implementation("org.postgresql:postgresql:$postgresql_version")
     implementation("com.zaxxer:HikariCP:$hikari_version")
