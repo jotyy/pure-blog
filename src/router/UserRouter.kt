@@ -5,10 +5,13 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.request.receiveParameters
 import io.ktor.response.respond
-import io.ktor.routing.*
+import io.ktor.routing.Routing
+import io.ktor.routing.delete
+import io.ktor.routing.get
+import io.ktor.routing.post
+import io.ktor.routing.put
 import top.jotyy.model.dto.UserDTO
 import top.jotyy.service.UserService
-
 
 private val userService by lazy { UserService() }
 

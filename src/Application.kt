@@ -13,18 +13,22 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.jackson.jackson
-import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.response.respondText
 import io.ktor.routing.get
-import io.ktor.routing.post
 import io.ktor.routing.routing
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 import router.userRouter
-import top.jotyy.model.*
-import javax.xml.crypto.Data
+import top.jotyy.model.Blogs
+import top.jotyy.model.Categories
+import top.jotyy.model.Comments
+import top.jotyy.model.Configs
+import top.jotyy.model.Links
+import top.jotyy.model.Relations
+import top.jotyy.model.Tags
+import top.jotyy.model.Users
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -41,7 +45,7 @@ fun Application.module(testing: Boolean = false) {
         header(HttpHeaders.Authorization)
         header("MyCustomHeader")
         allowCredentials = true
-        anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
+        anyHost()
     }
 
     install(Authentication) {
@@ -82,4 +86,5 @@ fun initDB() {
         SchemaUtils.create(Relations)
     }
 }
+
 

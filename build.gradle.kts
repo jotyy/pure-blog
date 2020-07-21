@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.dsl.Coroutines
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import io.gitlab.arturbosch.detekt.Detekt
 
 val ktor_version: String by project
 val kotlin_version: String by project
@@ -11,6 +12,7 @@ val postgresql_version: String by project
 plugins {
     application
     kotlin("jvm") version "1.3.70"
+    id("io.gitlab.arturbosch.detekt") version "1.10.0"
 }
 
 group = "top.jotyy"
@@ -30,6 +32,11 @@ repositories {
     maven { url = uri("https://kotlin.bintray.com/ktor") }
     mavenLocal()
     jcenter()
+    jcenter {
+        content {
+            includeGroup("org.jetbrain.kotlinx")
+        }
+    }
 }
 
 dependencies {
@@ -50,6 +57,24 @@ dependencies {
     implementation("org.postgresql:postgresql:$postgresql_version")
     implementation("com.zaxxer:HikariCP:$hikari_version")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
+}
+
+detekt {
+    toolVersion = "1.10.0"
+    input = files("src/")
+
+    reports {
+        html {
+            enabled = true
+            destination = file("build/reports/detekt.html")
+        }
+    }
+}
+
+tasks {
+    withType<Detekt> {
+        this.jvmTarget = "1.8"
+    }
 }
 
 kotlin.sourceSets["main"].kotlin.srcDirs("src")

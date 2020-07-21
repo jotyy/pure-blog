@@ -5,11 +5,12 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Column
+import top.jotyy.bootstrap.LENGTH_50
 
 object Users: IntIdTable(name = "tb_admin_user") {
-    val userName: Column<String> = varchar("login_user_name", 50)
-    val password: Column<String> = varchar("login_password", 50)
-    val nickName: Column<String> = varchar("nick_name", 50)
+    val userName: Column<String> = varchar("login_user_name", LENGTH_50)
+    val password: Column<String> = varchar("login_password", LENGTH_50)
+    val nickName: Column<String> = varchar("nick_name", LENGTH_50)
     val locked: Column<Int> = integer("locked").default(0)
 }
 
