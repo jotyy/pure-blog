@@ -2,6 +2,8 @@ package top.jotyy.model
 
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.jodatime.datetime
+import top.jotyy.bootstrap.LENGTH_100
+import top.jotyy.bootstrap.LENGTH_200
 
 object Configs : Table("tb_config") {
     val name = varchar("config_name", LENGTH_100)
