@@ -7,6 +7,11 @@ import top.jotyy.bootstrap.LENGTH_20
 import top.jotyy.bootstrap.LENGTH_200
 import top.jotyy.bootstrap.LENGTH_50
 
+/**
+ * Comment Table
+ *
+ * @author Jotyy
+ */
 object Comments : Table("tb_comment") {
     val id = integer("comment_id").autoIncrement()
     val blogId = integer("blog_id")

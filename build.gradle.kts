@@ -1,6 +1,6 @@
-import org.jetbrains.kotlin.gradle.dsl.Coroutines
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import io.gitlab.arturbosch.detekt.Detekt
+import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val ktor_version: String by project
 val kotlin_version: String by project
@@ -8,11 +8,14 @@ val logback_version: String by project
 val exposed_version: String by project
 val hikari_version: String by project
 val postgresql_version: String by project
+val junit_version: String by project
+val koin_version: String by project
 
 plugins {
     application
     kotlin("jvm") version "1.3.70"
     id("io.gitlab.arturbosch.detekt") version "1.10.0"
+    id("org.jetbrains.dokka") version "0.10.1"
 }
 
 group = "top.jotyy"
@@ -23,20 +26,12 @@ application {
 }
 
 repositories {
-    maven {
-        url = uri("https://maven.aliyun.com/repository/jcenter")
-    }
-    maven {
-        url = uri("https://maven.aliyun.com/repository/central")
-    }
-    maven { url = uri("https://kotlin.bintray.com/ktor") }
+    maven("https://maven.aliyun.com/repository/public")
+    maven("https://maven.aliyun.com/repository/central")
+    maven("https://maven.aliyun.com/repository/jcenter")
+    maven("https://kotlin.bintray.com/ktor")
     mavenLocal()
     jcenter()
-    jcenter {
-        content {
-            includeGroup("org.jetbrain.kotlinx")
-        }
-    }
 }
 
 dependencies {
@@ -55,8 +50,11 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jodatime:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
     implementation("org.postgresql:postgresql:$postgresql_version")
+    implementation("org.koin:koin-ktor:$koin_version")
     implementation("com.zaxxer:HikariCP:$hikari_version")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
+    testImplementation("org.junit.jupiter:junit-jupiter:$junit_version")
+    testImplementation("org.koin:koin-test:$koin_version")
 }
 
 detekt {
@@ -71,11 +69,28 @@ detekt {
     }
 }
 
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
+
 tasks {
     withType<Detekt> {
         this.jvmTarget = "1.8"
     }
+
+    withType<DokkaTask> {
+        outputFormat = "html"
+        outputDirectory = "$buildDir/dokka"
+    }
+
+    withType<KotlinCompile>().configureEach {
+        kotlinOptions.jvmTarget = "1.8"
+    }
 }
+
 
 kotlin.sourceSets["main"].kotlin.srcDirs("src")
 kotlin.sourceSets["test"].kotlin.srcDirs("test")

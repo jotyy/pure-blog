@@ -7,6 +7,11 @@ import org.joda.time.DateTime
 import top.jotyy.bootstrap.LENGTH_200
 import top.jotyy.bootstrap.LENGTH_50
 
+/**
+ * Blog Table
+ *
+ * @author Jotyy
+ */
 object Blogs: Table("tb_blog") {
     val id: Column<Int> = integer("blog_id").autoIncrement()
     val title: Column<String> = varchar("blog_title", LENGTH_200)

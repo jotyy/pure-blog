@@ -4,6 +4,11 @@ import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.jodatime.datetime
 import top.jotyy.bootstrap.LENGTH_50
 
+/**
+ * Category Table
+ *
+ * @author Jotyy
+ */
 object Categories : Table("tb_category") {
     val id = integer("category_id").autoIncrement()
     val name = varchar("category_name", LENGTH_50)

@@ -1,64 +1,60 @@
 package top.jotyy.service
 
-import org.jetbrains.exposed.sql.transactions.transaction
-import top.jotyy.model.User
 import top.jotyy.model.dto.UserDTO
 import top.jotyy.model.entity.UserEntity
+import top.jotyy.repository.UserRepository
 
-class UserService {
+/**
+ * User Service
+ */
+interface UserService {
 
-    // 查询所有用户
-    fun getAll(): List<UserEntity> = transaction {
-        User.all().map { user ->
-            UserEntity(
-                userId = user.id.value,
-                userName = user.userName,
-                nickName = user.nickName,
-                password = user.password,
-                locked = user.locked
-            )
-        }
-    }
+    /**
+     * Get all user
+     *
+     * @return [UserEntity] user list
+     */
+    fun getAll(): List<UserEntity>
 
-    // 根据id查询用户
-    fun getById(id: Int): UserEntity =
-        transaction {
-            val user = User.findById(id)
-            UserEntity(
-                userId = user!!.id.value,
-                userName = user.userName,
-                nickName = user.nickName,
-                password = user.password,
-                locked = user.locked
-            )
-        }
+    /**
+     * Get user by id
+     *
+     * @param id userId
+     * @return [UserEntity] User
+     */
+    fun getById(id: Int): UserEntity
 
-    // 新增用户
-    fun insert(userDTO: UserDTO) {
-        transaction {
-            User.new {
-                userName = userDTO.userName!!
-                nickName = userDTO.nickName!!
-                password = userDTO.password!!
-            }
-        }
-    }
+    /**
+     * Create a new user
+     *
+     * @param userDTO user info
+     */
+    fun add(userDTO: UserDTO)
 
-    // 修改用户
-    fun update(userDTO: UserDTO, id: Int) {
-        transaction {
-            User.findById(id)?.apply {
-                userName = userDTO.userName ?: userName
-                nickName = userDTO.nickName ?: nickName
-                password = userDTO.password ?: password
-            }
-        }
-    }
+    /**
+     * Modify a user
+     *
+     * @param userDTO user info
+     * @param id userId
+     */
+    fun update(userDTO: UserDTO, id: Int)
 
-    // 删除用户
-    fun delete(id: Int) {
-        transaction {
-            User.findById(id)?.delete()
-        }
-    }
+    /**
+     * Delete a user by id
+     *
+     * @param id userId
+     */
+    fun delete(id: Int)
+}
+
+class UserServiceImpl(val userRepository: UserRepository) : UserService {
+    override fun getAll(): List<UserEntity> = userRepository.getAll()
+
+    override fun getById(id: Int): UserEntity = userRepository.getById(id)
+
+    override fun add(userDTO: UserDTO) = userRepository.add(userDTO)
+
+    override fun update(userDTO: UserDTO, id: Int) = userRepository.update(userDTO, id)
+
+    override fun delete(id: Int) = userRepository.delete(id)
 }

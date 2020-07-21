@@ -5,6 +5,11 @@ import org.jetbrains.exposed.sql.jodatime.datetime
 import top.jotyy.bootstrap.LENGTH_100
 import top.jotyy.bootstrap.LENGTH_50
 
+/**
+ * Link Table
+ *
+ * @author Jotyy
+ */
 object Links : Table("tb_link") {
     val id = integer("link_id")
     val type = integer("link_type")

@@ -10,12 +10,16 @@ import io.ktor.routing.delete
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.put
+import org.koin.ktor.ext.inject
 import top.jotyy.model.dto.UserDTO
 import top.jotyy.service.UserService
 
-private val userService by lazy { UserService() }
-
+/**
+ * User Router
+ */
 fun Routing.userRouter() {
+    val userService by inject<UserService>()
+
     get("/users") {
         call.respond(mapOf("users" to userService.getAll()))
     }
@@ -33,7 +37,7 @@ fun Routing.userRouter() {
                 call.respond(mapOf("msg" to "Password can not be null"))
             }
             else -> {
-                userService.insert(userDTO)
+                userService.add(userDTO)
                 call.respond(HttpStatusCode.Created)
             }
         }

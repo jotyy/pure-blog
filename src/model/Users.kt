@@ -7,6 +7,11 @@ import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Column
 import top.jotyy.bootstrap.LENGTH_50
 
+/**
+ * User Table
+ *
+ * @author Jotyy
+ */
 object Users: IntIdTable(name = "tb_admin_user") {
     val userName: Column<String> = varchar("login_user_name", LENGTH_50)
     val password: Column<String> = varchar("login_password", LENGTH_50)
