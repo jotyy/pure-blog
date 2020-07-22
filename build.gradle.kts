@@ -26,9 +26,9 @@ application {
 }
 
 repositories {
-    maven("https://maven.aliyun.com/core.data.repository/public")
-    maven("https://maven.aliyun.com/core.data.repository/central")
-    maven("https://maven.aliyun.com/core.data.repository/jcenter")
+    maven("https://maven.aliyun.com/repository/public")
+    maven("https://maven.aliyun.com/repository/central")
+    maven("https://maven.aliyun.com/repository/jcenter")
     maven("https://kotlin.bintray.com/ktor")
     mavenLocal()
     jcenter()
