@@ -1,7 +1,7 @@
 package top.jotyy.service
 
-import top.jotyy.model.dto.UserDTO
 import top.jotyy.model.entity.UserEntity
+import top.jotyy.model.param.UserParam
 import top.jotyy.repository.UserRepository
 
 /**
@@ -27,17 +27,17 @@ interface UserService {
     /**
      * Create a new user
      *
-     * @param userDTO user info
+     * @param userParam user info
      */
-    fun add(userDTO: UserDTO)
+    fun add(userParam: UserParam)
 
     /**
      * Modify a user
      *
-     * @param userDTO user info
+     * @param userParam user info
      * @param id userId
      */
-    fun update(userDTO: UserDTO, id: Int)
+    fun update(userParam: UserParam, id: Int)
 
     /**
      * Delete a user by id
@@ -52,9 +52,9 @@ class UserServiceImpl(val userRepository: UserRepository) : UserService {
 
     override fun getById(id: Int): UserEntity = userRepository.getById(id)
 
-    override fun add(userDTO: UserDTO) = userRepository.add(userDTO)
+    override fun add(userParam: UserParam) = userRepository.add(userParam)
 
-    override fun update(userDTO: UserDTO, id: Int) = userRepository.update(userDTO, id)
+    override fun update(userParam: UserParam, id: Int) = userRepository.update(userParam, id)
 
     override fun delete(id: Int) = userRepository.delete(id)
 }

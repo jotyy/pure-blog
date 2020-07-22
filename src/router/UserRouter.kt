@@ -11,7 +11,8 @@ import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.put
 import org.koin.ktor.ext.inject
-import top.jotyy.model.dto.UserDTO
+import top.jotyy.bootstrap.USER_PATH
+import top.jotyy.model.param.UserParam
 import top.jotyy.service.UserService
 
 /**
@@ -20,12 +21,12 @@ import top.jotyy.service.UserService
 fun Routing.userRouter() {
     val userService by inject<UserService>()
 
-    get("/users") {
+    get(USER_PATH) {
         call.respond(mapOf("users" to userService.getAll()))
     }
 
-    post("/users") {
-        val userDTO = call.receive<UserDTO>()
+    post(USER_PATH) {
+        val userDTO = call.receive<UserParam>()
         when {
             userDTO.userName.isNullOrEmpty() -> {
                 call.respond(mapOf("msg" to "Username can not be null"))
@@ -43,9 +44,9 @@ fun Routing.userRouter() {
         }
     }
 
-    put("/users") {
+    put(USER_PATH) {
         val params = call.receiveParameters()
-        val userDTO = UserDTO(
+        val userDTO = UserParam(
             userName = params["userName"],
             nickName = params["nickName"],
             password = params["password"]
@@ -59,7 +60,7 @@ fun Routing.userRouter() {
         }
     }
 
-    delete("/users") {
+    delete(USER_PATH) {
         val id = call.parameters["id"]
         if (id != null) {
             userService.delete(id.toInt())

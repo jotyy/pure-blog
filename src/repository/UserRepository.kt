@@ -2,8 +2,8 @@ package top.jotyy.repository
 
 import org.jetbrains.exposed.sql.transactions.transaction
 import top.jotyy.model.User
-import top.jotyy.model.dto.UserDTO
 import top.jotyy.model.entity.UserEntity
+import top.jotyy.model.param.UserParam
 
 class UserRepository {
     fun getAll(): List<UserEntity> = transaction {
@@ -30,22 +30,22 @@ class UserRepository {
             )
         }
 
-    fun add(userDTO: UserDTO) {
+    fun add(userParam: UserParam) {
         transaction {
             User.new {
-                userName = userDTO.userName!!
-                nickName = userDTO.nickName!!
-                password = userDTO.password!!
+                userName = userParam.userName!!
+                nickName = userParam.nickName!!
+                password = userParam.password!!
             }
         }
     }
 
-    fun update(userDTO: UserDTO, id: Int) {
+    fun update(userParam: UserParam, id: Int) {
         transaction {
             User.findById(id)?.apply {
-                userName = userDTO.userName ?: userName
-                nickName = userDTO.nickName ?: nickName
-                password = userDTO.password ?: password
+                userName = userParam.userName ?: userName
+                nickName = userParam.nickName ?: nickName
+                password = userParam.password ?: password
             }
         }
     }

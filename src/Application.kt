@@ -17,6 +17,9 @@ import io.ktor.jackson.jackson
 import io.ktor.response.respondText
 import io.ktor.routing.get
 import io.ktor.routing.routing
+import io.ktor.server.engine.commandLineEnvironment
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -35,15 +38,22 @@ import top.jotyy.model.Links
 import top.jotyy.model.Relations
 import top.jotyy.model.Tags
 import top.jotyy.model.Users
+import top.jotyy.repository.TagRepository
 import top.jotyy.repository.UserRepository
+import top.jotyy.router.tagRoute
+import top.jotyy.service.TagService
+import top.jotyy.service.TagServiceImpl
 import top.jotyy.service.UserService
 import top.jotyy.service.UserServiceImpl
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+fun main(args: Array<String>) {
+    embeddedServer(
+        Netty,
+        commandLineEnvironment(args)
+    ).apply { start(wait = true) }
+}
 
-@Suppress("unused") // Referenced in application.conf
-@kotlin.jvm.JvmOverloads
-fun Application.module(testing: Boolean = false) {
+fun Application.module() {
     initDB()
 
     environment.monitor.subscribe(KoinApplicationStarted) {
@@ -51,7 +61,7 @@ fun Application.module(testing: Boolean = false) {
     }
 
     install(Koin) {
-        modules(userAppModule)
+        modules(appModule)
     }
 
 
@@ -84,16 +94,20 @@ fun Application.module(testing: Boolean = false) {
 
     routing {
         get("/") {
-            call.respondText("HELLO WORLD!", contentType = ContentType.Text.Plain)
+            call.respondText("HELLO!", contentType = ContentType.Text.Plain)
         }
 
         userRouter()
+        tagRoute()
     }
 }
 
-val userAppModule = module(createdAtStart = true) {
+val appModule = module(createdAtStart = true) {
     singleBy<UserService, UserServiceImpl>()
     single { UserRepository() }
+
+    singleBy<TagService, TagServiceImpl>()
+    single { TagRepository() }
 }
 
 fun initDB() {
