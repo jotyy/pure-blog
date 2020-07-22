@@ -29,22 +29,22 @@ import org.koin.ktor.ext.Koin
 import org.koin.ktor.ext.KoinApplicationStarted
 import org.koin.ktor.ext.KoinApplicationStopPreparing
 import org.koin.ktor.ext.KoinApplicationStopped
-import router.userRouter
-import top.jotyy.model.Blogs
-import top.jotyy.model.Categories
-import top.jotyy.model.Comments
-import top.jotyy.model.Configs
-import top.jotyy.model.Links
-import top.jotyy.model.Relations
-import top.jotyy.model.Tags
-import top.jotyy.model.Users
+import top.jotyy.core.data.table.Blogs
+import top.jotyy.core.data.table.Categories
+import top.jotyy.core.data.table.Comments
+import top.jotyy.core.data.table.Configs
+import top.jotyy.core.data.table.Links
+import top.jotyy.core.data.table.Relations
+import top.jotyy.core.data.table.Tags
+import top.jotyy.core.data.table.Users
+import top.jotyy.core.service.TagService
+import top.jotyy.core.service.TagServiceImpl
+import top.jotyy.core.service.UserService
+import top.jotyy.core.service.UserServiceImpl
+import top.jotyy.features.user.userRouter
 import top.jotyy.repository.TagRepository
 import top.jotyy.repository.UserRepository
-import top.jotyy.router.tagRoute
-import top.jotyy.service.TagService
-import top.jotyy.service.TagServiceImpl
-import top.jotyy.service.UserService
-import top.jotyy.service.UserServiceImpl
+import top.jotyy.features.tag.tagRoute
 
 fun main(args: Array<String>) {
     embeddedServer(
