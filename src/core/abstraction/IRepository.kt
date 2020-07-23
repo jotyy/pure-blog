@@ -1,7 +1,7 @@
-package core.abstraction
+package top.jotyy.core.abstraction
 
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
-import core.exception.EmptyResultError
+import top.jotyy.core.exception.EmptyResultError
 
 interface IRepository<E, P> {
     suspend fun <T, R> dbExecute(

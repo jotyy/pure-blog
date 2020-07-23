@@ -1,4 +1,4 @@
-package core.data.entity
+package top.jotyy.core.data.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.joda.time.DateTime

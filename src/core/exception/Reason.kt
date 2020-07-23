@@ -1,4 +1,4 @@
-package core.exception
+package top.jotyy.core.exception
 
 sealed class Reason(val msg: String) : Throwable()
 

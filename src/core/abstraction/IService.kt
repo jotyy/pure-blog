@@ -1,4 +1,4 @@
-package core.abstraction
+package top.jotyy.core.abstraction
 
 interface IService<E, P> {
     suspend fun getAll(): Result<List<E>>

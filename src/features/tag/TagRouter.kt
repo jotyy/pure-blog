@@ -1,6 +1,5 @@
 package top.jotyy.features.tag
 
-import core.abstraction.handleResult
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
@@ -10,6 +9,7 @@ import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.put
 import org.koin.ktor.ext.inject
+import top.jotyy.core.abstraction.handleResult
 import top.jotyy.core.data.constant.TAG_PATH
 import top.jotyy.core.data.param.TagParam
 import top.jotyy.core.service.TagService

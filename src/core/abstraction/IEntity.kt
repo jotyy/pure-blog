@@ -1,3 +1,3 @@
-package core.abstraction
+package top.jotyy.core.abstraction
 
 interface IEntity
