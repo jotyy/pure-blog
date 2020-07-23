@@ -42,7 +42,7 @@ import top.jotyy.core.service.TagServiceImpl
 import top.jotyy.core.service.UserService
 import top.jotyy.core.service.UserServiceImpl
 import top.jotyy.features.user.userRouter
-import top.jotyy.repository.TagRepository
+import top.jotyy.core.data.repository.TagRepository
 import top.jotyy.repository.UserRepository
 import top.jotyy.features.tag.tagRoute
 

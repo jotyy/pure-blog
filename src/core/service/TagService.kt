@@ -3,7 +3,7 @@ package top.jotyy.core.service
 import core.abstraction.IService
 import core.data.entity.TagEntity
 import top.jotyy.core.data.param.TagParam
-import top.jotyy.repository.TagRepository
+import top.jotyy.core.data.repository.TagRepository
 
 interface TagService : IService<TagEntity, TagParam>
 
