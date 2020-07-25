@@ -27,4 +27,5 @@ object Blogs: Table("tb_blog") {
     val isDeleted: Column<Int> = integer("is_deleted").default(0)
     val createdAt: Column<DateTime> = datetime("created_at").default(DateTime.now())
     val updatedAt = datetime("updated_at").default(DateTime.now())
+    override val primaryKey = PrimaryKey(Configs.id, name = "blog_id")
 }

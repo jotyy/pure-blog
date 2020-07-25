@@ -7,7 +7,7 @@ import top.jotyy.core.data.repository.TagRepository
 
 interface TagService : IService<TagEntity, TagParam>
 
-class TagServiceImpl(val repository: TagRepository) : TagService {
+class TagServiceImpl(private val repository: TagRepository) : TagService {
     override suspend fun getAll() = repository.getAll()
 
     override suspend fun getById(id: Int) = repository.getById(id)

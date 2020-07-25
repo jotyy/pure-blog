@@ -9,12 +9,12 @@ data class CommentEntity(
     val commentator: String,
     val email: String,
     val websiteUrl: String,
+    val commentBody: String,
     val commentBy: String,
-    val commentCreatedBy: String,
     val commentCreatedAt: DateTime,
     val commentatorIp: String,
     val replyBody: String,
-    val replyCreatedAt: String,
+    val replyCreatedAt: DateTime,
     val commentStatus: Int,
     @JsonIgnore val isDeleted: Int
 )
