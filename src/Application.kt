@@ -3,23 +3,16 @@ package top.jotyy
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import io.ktor.application.Application
-import io.ktor.application.call
-import io.ktor.application.install
-import io.ktor.application.log
-import io.ktor.auth.Authentication
-import io.ktor.features.CORS
-import io.ktor.features.ContentNegotiation
-import io.ktor.http.ContentType
-import io.ktor.http.HttpHeaders
-import io.ktor.http.HttpMethod
-import io.ktor.jackson.jackson
-import io.ktor.response.respondText
+import io.ktor.application.*
+import io.ktor.auth.*
+import io.ktor.features.*
+import io.ktor.http.*
+import io.ktor.jackson.*
+import io.ktor.response.*
 import io.ktor.routing.get
 import io.ktor.routing.routing
-import io.ktor.server.engine.commandLineEnvironment
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -29,6 +22,12 @@ import org.koin.ktor.ext.Koin
 import org.koin.ktor.ext.KoinApplicationStarted
 import org.koin.ktor.ext.KoinApplicationStopPreparing
 import org.koin.ktor.ext.KoinApplicationStopped
+import top.jotyy.core.data.repository.BlogRepository
+import top.jotyy.core.data.repository.CategoryRepository
+import top.jotyy.core.data.repository.CommentRepository
+import top.jotyy.core.data.repository.ConfigRepository
+import top.jotyy.core.data.repository.LinkRepository
+import top.jotyy.core.data.repository.TagRepository
 import top.jotyy.core.data.table.Blogs
 import top.jotyy.core.data.table.Categories
 import top.jotyy.core.data.table.Comments
@@ -37,14 +36,24 @@ import top.jotyy.core.data.table.Links
 import top.jotyy.core.data.table.Relations
 import top.jotyy.core.data.table.Tags
 import top.jotyy.core.data.table.Users
+import top.jotyy.core.service.BlogService
+import top.jotyy.core.service.BlogServiceImpl
+import top.jotyy.core.service.CategoryService
+import top.jotyy.core.service.CategoryServiceImpl
+import top.jotyy.core.service.CommentService
+import top.jotyy.core.service.CommentServiceImpl
+import top.jotyy.core.service.ConfigService
+import top.jotyy.core.service.ConfigServiceImpl
+import top.jotyy.core.service.LinkService
+import top.jotyy.core.service.LinkServiceImpl
 import top.jotyy.core.service.TagService
 import top.jotyy.core.service.TagServiceImpl
 import top.jotyy.core.service.UserService
 import top.jotyy.core.service.UserServiceImpl
-import top.jotyy.features.user.userRouter
-import top.jotyy.core.data.repository.TagRepository
-import top.jotyy.repository.UserRepository
+import top.jotyy.features.blog.blogRoute
 import top.jotyy.features.tag.tagRoute
+import top.jotyy.features.user.userRouter
+import top.jotyy.repository.UserRepository
 
 fun main(args: Array<String>) {
     embeddedServer(
@@ -99,17 +108,39 @@ fun Application.module() {
 
         userRouter()
         tagRoute()
+        blogRoute()
     }
 }
 
+/**
+ * Dependency Injection
+ */
 val appModule = module(createdAtStart = true) {
     singleBy<UserService, UserServiceImpl>()
     single { UserRepository() }
 
     singleBy<TagService, TagServiceImpl>()
     single { TagRepository() }
+
+    singleBy<BlogService, BlogServiceImpl>()
+    single { BlogRepository() }
+
+    singleBy<CategoryService, CategoryServiceImpl>()
+    single { CategoryRepository() }
+
+    singleBy<CommentService, CommentServiceImpl>()
+    single { CommentRepository() }
+
+    singleBy<ConfigService, ConfigServiceImpl>()
+    single { ConfigRepository() }
+
+    singleBy<LinkService, LinkServiceImpl>()
+    single { LinkRepository() }
 }
 
+/**
+ * Database Initialize
+ */
 fun initDB() {
     val config = HikariConfig("/hikari.properties")
     config.schema = "pure-blog"

@@ -1,17 +1,12 @@
 package top.jotyy.features.user
 
-import io.ktor.application.call
-import io.ktor.http.HttpStatusCode
-import io.ktor.request.receive
-import io.ktor.request.receiveParameters
-import io.ktor.response.respond
-import io.ktor.routing.Routing
-import io.ktor.routing.delete
-import io.ktor.routing.get
-import io.ktor.routing.post
-import io.ktor.routing.put
+import core.data.constants.USER_PATH
+import io.ktor.application.*
+import io.ktor.http.*
+import io.ktor.request.*
+import io.ktor.response.*
+import io.ktor.routing.*
 import org.koin.ktor.ext.inject
-import top.jotyy.core.data.constant.USER_PATH
 import top.jotyy.core.data.param.UserParam
 import top.jotyy.core.service.UserService
 

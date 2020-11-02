@@ -1,16 +1,12 @@
 package top.jotyy.features.tag
 
-import io.ktor.application.call
-import io.ktor.http.HttpStatusCode
-import io.ktor.response.respond
-import io.ktor.routing.Routing
-import io.ktor.routing.delete
-import io.ktor.routing.get
-import io.ktor.routing.post
-import io.ktor.routing.put
+import core.data.constants.TAG_PATH
+import io.ktor.application.*
+import io.ktor.http.*
+import io.ktor.response.*
+import io.ktor.routing.*
 import org.koin.ktor.ext.inject
 import top.jotyy.core.abstraction.handleResult
-import top.jotyy.core.data.constant.TAG_PATH
 import top.jotyy.core.data.param.TagParam
 import top.jotyy.core.service.TagService
 
