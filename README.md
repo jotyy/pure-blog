@@ -1,9 +1,11 @@
 ![Pure Blog](https://github.com/jotyy/pure-blog/workflows/Pure%20Blog/badge.svg)
-![Language](https://img.shields.io/github/languages/top/cortinico/kotlin-android-template?color=blue&logo=kotlin)
+![Language](https://img.shields.io/badge/kotlin-100%25-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Activity](https://img.shields.io/github/last-commit/jotyy/pure-blog?color=orange&label=last-commit)
 
 <p align="center">
   <a href="https://github.com/github_username/repo">
-    <img src="images/logo.png" alt="Logo" height="80">
+    <img src="images/logo.png" alt="Logo" height="200">
   </a>
   <h3 align="center">PURE_BLOG</h3>
 
@@ -106,17 +108,3 @@ Project Link: [https://github.com/jotyy/pure-blog](https://github.com/jotyy/pure
 * []()
 * []()
 
-
-
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
-[github-action]:https://github.com/jotyy/pure-blog/workflows/Pure%20Blog/badge.svg
