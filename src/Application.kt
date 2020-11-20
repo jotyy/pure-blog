@@ -3,6 +3,7 @@ package top.jotyy
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import core.data.repository.UserRepository
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.features.*
@@ -53,7 +54,6 @@ import top.jotyy.core.service.UserServiceImpl
 import top.jotyy.features.blog.blogRoute
 import top.jotyy.features.tag.tagRoute
 import top.jotyy.features.user.userRouter
-import core.data.repository.UserRepository
 
 fun main(args: Array<String>) {
     embeddedServer(
