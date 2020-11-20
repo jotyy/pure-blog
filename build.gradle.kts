@@ -1,7 +1,7 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val ktorVersion: String = "1.4.2"
+val ktorVersion: String = "1.4.1"
 val kotlinVersion: String = "1.4.10"
 val logbackVersion: String ="1.2.1"
 val exposedVersion: String ="0.28.1"

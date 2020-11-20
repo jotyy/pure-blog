@@ -20,6 +20,11 @@ fun Routing.userRouter() {
         call.respond(mapOf("users" to userService.getAll()))
     }
 
+    get("$USER_PATH/{id}") {
+        val id = call.parameters["id"]
+        call.respond(userService.getById(id?.toInt() ?: 0))
+    }
+
     post(USER_PATH) {
         val userDTO = call.receive<UserParam>()
         when {

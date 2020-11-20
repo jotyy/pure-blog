@@ -53,7 +53,7 @@ import top.jotyy.core.service.UserServiceImpl
 import top.jotyy.features.blog.blogRoute
 import top.jotyy.features.tag.tagRoute
 import top.jotyy.features.user.userRouter
-import top.jotyy.repository.UserRepository
+import core.data.repository.UserRepository
 
 fun main(args: Array<String>) {
     embeddedServer(

@@ -1,4 +1,4 @@
-package top.jotyy.repository
+package core.data.repository
 
 import org.jetbrains.exposed.sql.transactions.transaction
 import top.jotyy.core.data.entity.UserEntity

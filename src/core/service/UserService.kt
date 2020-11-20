@@ -1,8 +1,8 @@
 package top.jotyy.core.service
 
+import core.data.repository.UserRepository
 import top.jotyy.core.data.entity.UserEntity
 import top.jotyy.core.data.param.UserParam
-import top.jotyy.repository.UserRepository
 
 /**
  * User Service
