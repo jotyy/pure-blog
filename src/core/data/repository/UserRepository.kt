@@ -1,9 +1,9 @@
 package top.jotyy.repository
 
 import org.jetbrains.exposed.sql.transactions.transaction
-import top.jotyy.core.data.table.User
 import top.jotyy.core.data.entity.UserEntity
 import top.jotyy.core.data.param.UserParam
+import top.jotyy.core.data.table.User
 
 class UserRepository {
     fun getAll(): List<UserEntity> = transaction {

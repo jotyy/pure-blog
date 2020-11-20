@@ -48,7 +48,6 @@ class CategoryRepository : IRepository<CategoryEntity, CategoryParam> {
             .singleOrNull()
     }) { emptyOrNot(it) }
 
-
     override suspend fun delete(id: Int): Result<String> = dbExecute({
         Categories.deleteWhere { Categories.id eq id }
     }) {

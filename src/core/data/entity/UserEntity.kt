@@ -14,5 +14,5 @@ data class UserEntity(
     val password: String,
     @JsonIgnore val locked: Int
 ) {
-    val isActive = locked == 0  // 判断账户是否可用
+    val isActive = locked == 0 // 判断账户是否可用
 }

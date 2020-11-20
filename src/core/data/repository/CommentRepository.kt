@@ -54,7 +54,6 @@ class CommentRepository : IRepository<CommentEntity, CommentParam> {
             .singleOrNull()
     }) { emptyOrNot(it) }
 
-
     override suspend fun delete(id: Int): Result<String> = dbExecute({
         Comments.deleteWhere { Comments.id eq id }
     }) {

@@ -12,7 +12,7 @@ import top.jotyy.bootstrap.LENGTH_50
  *
  * @author Jotyy
  */
-object Blogs: Table("tb_blog") {
+object Blogs : Table("tb_blog") {
     val id: Column<Int> = integer("blog_id").autoIncrement()
     val title: Column<String> = varchar("blog_title", LENGTH_200)
     val subUrl: Column<String> = varchar("blog_sub_url", LENGTH_200)

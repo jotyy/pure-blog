@@ -52,7 +52,6 @@ class LinkRepository : IRepository<LinkEntity, LinkParam> {
             .singleOrNull()
     }) { emptyOrNot(it) }
 
-
     override suspend fun delete(id: Int): Result<String> = dbExecute({
         Links.deleteWhere { Links.id eq id }
     }) {

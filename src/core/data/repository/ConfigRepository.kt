@@ -48,7 +48,6 @@ class ConfigRepository : IRepository<ConfigEntity, ConfigParam> {
             .singleOrNull()
     }) { emptyOrNot(it) }
 
-
     override suspend fun delete(id: Int): Result<String> = dbExecute({
         Configs.deleteWhere { Configs.id eq id }
     }) {

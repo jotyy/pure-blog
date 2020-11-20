@@ -60,7 +60,6 @@ class BlogRepository : IRepository<BlogEntity, BlogParam> {
             .singleOrNull()
     }) { emptyOrNot(it) }
 
-
     override suspend fun delete(id: Int): Result<String> = dbExecute({
         Blogs.deleteWhere { Blogs.id eq id }
     }) {

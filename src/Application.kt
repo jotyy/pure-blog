@@ -73,7 +73,6 @@ fun Application.module() {
         modules(appModule)
     }
 
-
     environment.monitor.subscribe(KoinApplicationStopPreparing) {
         log.info("Koin stopping...")
     }
@@ -157,5 +156,3 @@ fun initDB() {
         SchemaUtils.create(Relations)
     }
 }
-
-

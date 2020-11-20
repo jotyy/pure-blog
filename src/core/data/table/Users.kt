@@ -12,14 +12,14 @@ import top.jotyy.bootstrap.LENGTH_50
  *
  * @author Jotyy
  */
-object Users: IntIdTable(name = "tb_admin_user") {
+object Users : IntIdTable(name = "tb_admin_user") {
     val userName: Column<String> = varchar("login_user_name", LENGTH_50)
     val password: Column<String> = varchar("login_password", LENGTH_50)
     val nickName: Column<String> = varchar("nick_name", LENGTH_50)
     val locked: Column<Int> = integer("locked").default(0)
 }
 
-class User(id: EntityID<Int>): IntEntity(id) {
+class User(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<User>(Users)
 
     var userName by Users.userName

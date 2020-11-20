@@ -46,7 +46,6 @@ class TagRepository : IRepository<TagEntity, TagParam> {
             .singleOrNull()
     }) { emptyOrNot(it) }
 
-
     override suspend fun delete(id: Int): Result<String> = dbExecute({
         Tags.deleteWhere { Tags.id eq id }
     }) {

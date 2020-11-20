@@ -18,7 +18,6 @@ interface IRepository<E, P> {
     fun <T> emptyOrNot(t: T?): Result<T> =
         t?.let { Success(t) } ?: Failure(EmptyResultError())
 
-
     suspend fun getAll(): Result<List<E>>
     suspend fun getById(id: Int): Result<E>
     suspend fun add(param: P): Result<E>

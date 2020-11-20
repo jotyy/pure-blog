@@ -1,21 +1,20 @@
-import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val ktor_version: String by project
-val kotlin_version: String by project
-val logback_version: String by project
-val exposed_version: String by project
-val hikari_version: String by project
-val postgresql_version: String by project
-val junit_version: String by project
-val koin_version: String by project
+val ktorVersion: String = "1.4.2"
+val kotlinVersion: String = "1.4.10"
+val logbackVersion: String ="1.2.1"
+val exposedVersion: String ="0.28.1"
+val hikariVersion: String ="3.4.5"
+val postgresqlVersion: String ="42.2.14"
+val koinVersion: String = "2.1.6"
+val junitVersion: String = "5.6.2"
 
 plugins {
     application
     kotlin("jvm") version "1.4.10"
-    id("io.gitlab.arturbosch.detekt") version "1.10.0"
     id("org.jetbrains.dokka") version "0.10.1"
+    id("com.diffplug.gradle.spotless") version "4.5.1"
 }
 
 group = "top.jotyy"
@@ -35,35 +34,23 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
-    implementation("io.ktor:ktor-server-netty:$ktor_version")
-    implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("io.ktor:ktor-server-core:$ktor_version")
-    implementation("io.ktor:ktor-auth:$ktor_version")
-    implementation("io.ktor:ktor-auth-jwt:$ktor_version")
-    implementation("io.ktor:ktor-jackson:$ktor_version")
-    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
-    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
-    implementation("org.jetbrains.exposed:exposed-jodatime:$exposed_version")
-    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
-    implementation("org.postgresql:postgresql:$postgresql_version")
-    implementation("org.koin:koin-ktor:$koin_version")
-    implementation("com.zaxxer:HikariCP:$hikari_version")
-    testImplementation("io.ktor:ktor-server-tests:$ktor_version")
-    testImplementation("org.junit.jupiter:junit-jupiter:$junit_version")
-    testImplementation("org.koin:koin-test:$koin_version")
-}
-
-detekt {
-    toolVersion = "1.10.0"
-    input = files("src/")
-
-    reports {
-        html {
-            enabled = true
-            destination = file("build/reports/detekt.html")
-        }
-    }
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
+    implementation("io.ktor:ktor-server-netty:$ktorVersion")
+    implementation("ch.qos.logback:logback-classic:$logbackVersion")
+    implementation("io.ktor:ktor-server-core:$ktorVersion")
+    implementation("io.ktor:ktor-auth:$ktorVersion")
+    implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
+    implementation("io.ktor:ktor-jackson:$ktorVersion")
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jodatime:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+    implementation("org.postgresql:postgresql:$postgresqlVersion")
+    implementation("org.koin:koin-ktor:$koinVersion")
+    implementation("com.zaxxer:HikariCP:$hikariVersion")
+    testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
+    testImplementation("org.koin:koin-test:$koinVersion")
 }
 
 tasks.test {
@@ -73,11 +60,16 @@ tasks.test {
     }
 }
 
-tasks {
-    withType<Detekt> {
-        this.jvmTarget = "1.8"
+spotless {
+    kotlin {
+        target("**/*.kt")
+        ktlint().userData(mapOf("disabled_rules" to "no-wildcard-imports"))
+        trimTrailingWhitespace()
+        endWithNewline()
     }
+}
 
+tasks {
     withType<DokkaTask> {
         outputFormat = "html"
         outputDirectory = "$buildDir/dokka"

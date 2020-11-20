@@ -14,18 +14,14 @@ fun Routing.blogRoute() {
     }
 
     get("$BLOG_PATH/{id}") {
-
     }
 
     post(BLOG_PATH) {
-
     }
 
     put(BLOG_PATH) {
-
     }
 
     delete(BLOG_PATH) {
-
     }
 }

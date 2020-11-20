@@ -21,6 +21,3 @@ object Links : Table("tb_link") {
     val createdAt = datetime("created_at")
     override val primaryKey = PrimaryKey(Configs.id, name = "link_id")
 }
-
-
-
