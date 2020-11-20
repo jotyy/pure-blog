@@ -1,11 +1,9 @@
 ![Pure Blog](https://github.com/jotyy/pure-blog/workflows/Pure%20Blog/badge.svg)
 ![Language](https://img.shields.io/github/languages/top/cortinico/kotlin-android-template?color=blue&logo=kotlin)
 
-
-
 <p align="center">
   <a href="https://github.com/github_username/repo">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/logo.png" alt="Logo" height="80">
   </a>
   <h3 align="center">PURE_BLOG</h3>
 
