@@ -3,7 +3,6 @@ package top.jotyy
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import core.data.repository.UserRepository
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.features.*
@@ -17,11 +16,6 @@ import io.ktor.server.netty.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
-import org.koin.dsl.module
-import org.koin.ktor.ext.Koin
-import org.koin.ktor.ext.KoinApplicationStarted
-import org.koin.ktor.ext.KoinApplicationStopPreparing
-import org.koin.ktor.ext.KoinApplicationStopped
 import top.jotyy.core.data.table.Blogs
 import top.jotyy.core.data.table.Categories
 import top.jotyy.core.data.table.Comments
@@ -43,21 +37,6 @@ fun main(args: Array<String>) {
 
 fun Application.module() {
     initDB()
-
-    environment.monitor.subscribe(KoinApplicationStarted) {
-        log.info("Koin started")
-    }
-
-    install(Koin) {
-        modules(appModule)
-    }
-
-    environment.monitor.subscribe(KoinApplicationStopPreparing) {
-        log.info("Koin stopping...")
-    }
-    environment.monitor.subscribe(KoinApplicationStopped) {
-        log.info("Koin stopped.")
-    }
 
     install(CORS) {
         method(HttpMethod.Options)
@@ -81,20 +60,13 @@ fun Application.module() {
 
     routing {
         get("/") {
-            call.respondText("HELLO!", contentType = ContentType.Text.Plain)
+            call.respondText("HELLO, I'm jotyy!", contentType = ContentType.Text.Plain)
         }
 
         userRouter()
         tagRoute()
         blogRoute()
     }
-}
-
-/**
- * Dependency Injection
- */
-val appModule = module(createdAtStart = true) {
-    single { UserRepository() }
 }
 
 /**
