@@ -1,9 +1,9 @@
-package top.jotyy.core.data.entity
+package top.jotyy.core.data.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.joda.time.DateTime
 
-data class BlogEntity(
+data class Blog(
     val blogId: Int,
     val blogTitle: String,
     val blogSubUrl: String,

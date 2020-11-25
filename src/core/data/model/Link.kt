@@ -1,9 +1,9 @@
-package top.jotyy.core.data.entity
+package top.jotyy.core.data.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.joda.time.DateTime
 
-data class LinkEntity(
+data class Link(
     val linkId: Int,
     val linkType: Int,
     val linkName: String,

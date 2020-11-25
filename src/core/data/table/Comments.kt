@@ -1,11 +1,11 @@
 package top.jotyy.core.data.table
 
+import core.constants.LENGTH_100
+import core.constants.LENGTH_20
+import core.constants.LENGTH_200
+import core.constants.LENGTH_50
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.jodatime.datetime
-import top.jotyy.bootstrap.LENGTH_100
-import top.jotyy.bootstrap.LENGTH_20
-import top.jotyy.bootstrap.LENGTH_200
-import top.jotyy.bootstrap.LENGTH_50
 
 /**
  * Comment Table

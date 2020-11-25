@@ -1,13 +1,14 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val ktorVersion: String = "1.4.1"
+val ktorVersion: String = "1.4.2"
 val kotlinVersion: String = "1.4.10"
 val logbackVersion: String ="1.2.1"
 val exposedVersion: String ="0.28.1"
 val hikariVersion: String ="3.4.5"
 val postgresqlVersion: String ="42.2.14"
 val koinVersion: String = "2.1.6"
+val valiktorVersion: String = "0.12.0"
 val junitVersion: String = "5.6.2"
 
 plugins {
@@ -48,6 +49,7 @@ dependencies {
     implementation("org.postgresql:postgresql:$postgresqlVersion")
     implementation("org.koin:koin-ktor:$koinVersion")
     implementation("com.zaxxer:HikariCP:$hikariVersion")
+    implementation("org.valiktor:valiktor-core:$valiktorVersion")
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
     testImplementation("org.koin:koin-test:$koinVersion")

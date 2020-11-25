@@ -1,8 +1,8 @@
-package top.jotyy.core.data.entity
+package top.jotyy.core.data.model
 
 import org.joda.time.DateTime
 
-data class RelationEntity(
+data class Relation(
     val relationId: Int,
     val blogId: Int,
     val tagId: Int,

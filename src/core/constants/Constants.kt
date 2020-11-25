@@ -1,4 +1,4 @@
-package top.jotyy.bootstrap
+package core.constants
 
 const val LENGTH_20 = 20
 const val LENGTH_50 = 50

@@ -1,11 +1,11 @@
 package top.jotyy.core.data.table
 
+import core.constants.LENGTH_50
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Column
-import top.jotyy.bootstrap.LENGTH_50
 
 /**
  * User Table

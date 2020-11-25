@@ -1,4 +1,4 @@
-package core.data.constants
+package core.constants
 
 const val API_PREFIX = "/api/v1"
 

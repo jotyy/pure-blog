@@ -1,9 +1,9 @@
-package top.jotyy.core.data.entity
+package top.jotyy.core.data.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.joda.time.DateTime
 
-data class TagEntity(
+data class Tag(
     val tagId: Int,
     val tagName: String,
     val isDeleted: Int,

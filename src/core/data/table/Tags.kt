@@ -1,9 +1,9 @@
 package top.jotyy.core.data.table
 
+import core.constants.LENGTH_100
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.jodatime.datetime
 import org.joda.time.DateTime
-import top.jotyy.bootstrap.LENGTH_100
 
 /**
  * Tag Table

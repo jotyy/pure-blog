@@ -18,17 +18,10 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.koin.dsl.module
-import org.koin.experimental.builder.singleBy
 import org.koin.ktor.ext.Koin
 import org.koin.ktor.ext.KoinApplicationStarted
 import org.koin.ktor.ext.KoinApplicationStopPreparing
 import org.koin.ktor.ext.KoinApplicationStopped
-import top.jotyy.core.data.repository.BlogRepository
-import top.jotyy.core.data.repository.CategoryRepository
-import top.jotyy.core.data.repository.CommentRepository
-import top.jotyy.core.data.repository.ConfigRepository
-import top.jotyy.core.data.repository.LinkRepository
-import top.jotyy.core.data.repository.TagRepository
 import top.jotyy.core.data.table.Blogs
 import top.jotyy.core.data.table.Categories
 import top.jotyy.core.data.table.Comments
@@ -37,20 +30,6 @@ import top.jotyy.core.data.table.Links
 import top.jotyy.core.data.table.Relations
 import top.jotyy.core.data.table.Tags
 import top.jotyy.core.data.table.Users
-import top.jotyy.core.service.BlogService
-import top.jotyy.core.service.BlogServiceImpl
-import top.jotyy.core.service.CategoryService
-import top.jotyy.core.service.CategoryServiceImpl
-import top.jotyy.core.service.CommentService
-import top.jotyy.core.service.CommentServiceImpl
-import top.jotyy.core.service.ConfigService
-import top.jotyy.core.service.ConfigServiceImpl
-import top.jotyy.core.service.LinkService
-import top.jotyy.core.service.LinkServiceImpl
-import top.jotyy.core.service.TagService
-import top.jotyy.core.service.TagServiceImpl
-import top.jotyy.core.service.UserService
-import top.jotyy.core.service.UserServiceImpl
 import top.jotyy.features.blog.blogRoute
 import top.jotyy.features.tag.tagRoute
 import top.jotyy.features.user.userRouter
@@ -115,26 +94,7 @@ fun Application.module() {
  * Dependency Injection
  */
 val appModule = module(createdAtStart = true) {
-    singleBy<UserService, UserServiceImpl>()
     single { UserRepository() }
-
-    singleBy<TagService, TagServiceImpl>()
-    single { TagRepository() }
-
-    singleBy<BlogService, BlogServiceImpl>()
-    single { BlogRepository() }
-
-    singleBy<CategoryService, CategoryServiceImpl>()
-    single { CategoryRepository() }
-
-    singleBy<CommentService, CommentServiceImpl>()
-    single { CommentRepository() }
-
-    singleBy<ConfigService, ConfigServiceImpl>()
-    single { ConfigRepository() }
-
-    singleBy<LinkService, LinkServiceImpl>()
-    single { LinkRepository() }
 }
 
 /**

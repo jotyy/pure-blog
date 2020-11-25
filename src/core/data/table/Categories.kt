@@ -1,8 +1,8 @@
 package top.jotyy.core.data.table
 
+import core.constants.LENGTH_50
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.jodatime.datetime
-import top.jotyy.bootstrap.LENGTH_50
 
 /**
  * Category Table
