@@ -58,5 +58,17 @@ fun Routing.userRouter() {
     }
 
     delete(USER_PATH) {
+        withContext(Dispatchers.IO) {
+            val id = call.parameters["id"]?.toInt()
+            id?.let {
+                userRepository.deleteUser(id)
+                    .collect { result ->
+                        when (result) {
+                            is Success -> call.respond(HttpStatusCode.OK, "删除成功")
+                            is Failure -> call.respond(HttpStatusCode.BadRequest, result.errorData)
+                        }
+                    }
+            }
+        }
     }
 }
