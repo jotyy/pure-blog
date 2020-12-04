@@ -1,5 +1,6 @@
 package top.jotyy
 
+import com.apurebase.kgraphql.GraphQL
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -55,6 +56,17 @@ fun Application.module() {
     install(ContentNegotiation) {
         jackson {
             enable(SerializationFeature.INDENT_OUTPUT)
+        }
+    }
+
+    install(GraphQL) {
+        playground = true
+        schema {
+            query("hello") {
+                resolver { ->
+                    "World"
+                }
+            }
         }
     }
 

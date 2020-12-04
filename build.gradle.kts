@@ -8,6 +8,7 @@ val exposedVersion: String ="0.28.1"
 val hikariVersion: String ="3.4.5"
 val postgresqlVersion: String ="42.2.14"
 val koinVersion: String = "2.1.6"
+val kGraphQLVersion: String = "0.16.0"
 val valiktorVersion: String = "0.12.0"
 val junitVersion: String = "5.6.2"
 
@@ -26,12 +27,12 @@ application {
 }
 
 repositories {
+    mavenLocal()
+    jcenter()
     maven("https://maven.aliyun.com/repository/public")
     maven("https://maven.aliyun.com/repository/central")
     maven("https://maven.aliyun.com/repository/jcenter")
     maven("https://kotlin.bintray.com/ktor")
-    mavenLocal()
-    jcenter()
 }
 
 dependencies {
@@ -49,6 +50,8 @@ dependencies {
     implementation("org.postgresql:postgresql:$postgresqlVersion")
     implementation("org.koin:koin-ktor:$koinVersion")
     implementation("com.zaxxer:HikariCP:$hikariVersion")
+    implementation("com.apurebase:kgraphql:$kGraphQLVersion")
+    implementation("com.apurebase:kgraphql-ktor:$kGraphQLVersion")
     implementation("org.valiktor:valiktor-core:$valiktorVersion")
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
