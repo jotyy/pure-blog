@@ -1,7 +1,10 @@
 package top.jotyy.core.data.table
 
 import core.constants.LENGTH_100
-import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.dao.IntEntity
+import org.jetbrains.exposed.dao.IntEntityClass
+import org.jetbrains.exposed.dao.id.EntityID
+import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.jodatime.datetime
 import org.joda.time.DateTime
 
@@ -10,8 +13,7 @@ import org.joda.time.DateTime
  *
  * @author Jotyy
  */
-object Tags : Table("tb_tag") {
-    val id = integer("tag_id").autoIncrement()
+object Tags : IntIdTable(name = "tb_tag", columnName = "tag_id") {
     val name = varchar("tag_name", LENGTH_100)
     val isDeleted = integer("is_deleted")
         .default(0)
