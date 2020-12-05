@@ -5,7 +5,6 @@ import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
-import org.jetbrains.exposed.sql.Column
 
 /**
  * User Table
@@ -13,10 +12,10 @@ import org.jetbrains.exposed.sql.Column
  * @author Jotyy
  */
 object Users : IntIdTable(name = "tb_admin_user") {
-    val userName: Column<String> = varchar("login_user_name", LENGTH_50)
-    val password: Column<String> = varchar("login_password", LENGTH_50)
-    val nickName: Column<String> = varchar("nick_name", LENGTH_50)
-    val locked: Column<Int> = integer("locked").default(0)
+    val userName = varchar("login_user_name", LENGTH_50)
+    val password = varchar("login_password", LENGTH_50)
+    val nickName = varchar("nick_name", LENGTH_50)
+    val locked = integer("locked").default(0)
 }
 
 class User(id: EntityID<Int>) : IntEntity(id) {
