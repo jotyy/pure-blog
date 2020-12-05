@@ -1,16 +1,16 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val ktorVersion: String = "1.4.2"
-val kotlinVersion: String = "1.4.10"
-val logbackVersion: String ="1.2.1"
-val exposedVersion: String ="0.28.1"
-val hikariVersion: String ="3.4.5"
-val postgresqlVersion: String ="42.2.14"
-val koinVersion: String = "2.1.6"
-val kGraphQLVersion: String = "0.16.0"
-val valiktorVersion: String = "0.12.0"
-val junitVersion: String = "5.6.2"
+val ktorVersion = "1.4.3"
+val kotlinVersion = "1.4.10"
+val logbackVersion ="1.2.1"
+val exposedVersion ="0.28.1"
+val hikariVersion ="3.4.5"
+val postgresqlVersion ="42.2.14"
+val koinVersion = "2.1.6"
+val kGraphQLVersion = "0.16.0"
+val valiktorVersion = "0.12.0"
+val junitVersion = "5.6.2"
 
 plugins {
     application

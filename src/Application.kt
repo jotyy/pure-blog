@@ -17,6 +17,10 @@ import io.ktor.server.netty.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.koin.dsl.module
+import org.koin.ktor.ext.Koin
+import top.jotyy.core.data.dao.ConfigDao
+import top.jotyy.core.data.repository.ConfigRepository
 import top.jotyy.core.data.table.Blogs
 import top.jotyy.core.data.table.Categories
 import top.jotyy.core.data.table.Comments
@@ -26,6 +30,7 @@ import top.jotyy.core.data.table.Relations
 import top.jotyy.core.data.table.Tags
 import top.jotyy.core.data.table.Users
 import top.jotyy.features.blog.blogRoute
+import top.jotyy.features.configRouter
 import top.jotyy.features.tag.tagRoute
 import top.jotyy.features.user.userRouter
 
@@ -38,6 +43,10 @@ fun main(args: Array<String>) {
 
 fun Application.module() {
     initDB()
+
+    install(Koin) {
+        modules(appModule)
+    }
 
     install(CORS) {
         method(HttpMethod.Options)
@@ -75,10 +84,19 @@ fun Application.module() {
             call.respondText("HELLO, I'm jotyy!", contentType = ContentType.Text.Plain)
         }
 
+        configRouter()
         userRouter()
         tagRoute()
         blogRoute()
     }
+}
+
+/**
+ * DI
+ */
+val appModule = module(createdAtStart = true) {
+    single { ConfigDao() }
+    single { ConfigRepository(get()) }
 }
 
 /**

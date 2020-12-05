@@ -1,3 +1,13 @@
 package top.jotyy.core.data.repository
 
-class ConfigRepository
+import top.jotyy.core.data.dao.ConfigDao
+import top.jotyy.core.data.param.ConfigParam
+
+class ConfigRepository(private val configDao: ConfigDao) {
+
+    fun getConfigs() = configDao.getAllConfigs()
+
+    fun addConfig(param: ConfigParam) = configDao.addConfig(param)
+
+    fun updateConfig(param: ConfigParam) = configDao.updateConfig(param)
+}

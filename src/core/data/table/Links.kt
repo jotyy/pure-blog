@@ -19,5 +19,5 @@ object Links : Table("tb_link") {
     val rank = integer("link_rank")
     val isDeleted = integer("is_deleted")
     val createdAt = datetime("created_at")
-    override val primaryKey = PrimaryKey(Configs.id, name = "link_id")
+    override val primaryKey = PrimaryKey(id, name = "link_id")
 }
