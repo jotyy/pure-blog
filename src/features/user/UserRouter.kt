@@ -2,6 +2,8 @@ package top.jotyy.features.user
 
 import core.constants.USER_PATH
 import core.data.repository.UserRepository
+import core.functional.Failure
+import core.functional.Success
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
@@ -10,8 +12,6 @@ import io.ktor.routing.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
-import top.jotyy.core.abstraction.Failure
-import top.jotyy.core.abstraction.Success
 import top.jotyy.core.data.param.AddUserParam
 
 /**

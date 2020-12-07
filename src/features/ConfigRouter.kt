@@ -9,9 +9,11 @@ import io.ktor.routing.*
 import org.koin.ktor.ext.inject
 import top.jotyy.core.data.param.ConfigParam
 import top.jotyy.core.data.repository.ConfigRepository
+import top.jotyy.core.usecases.config.UpdateConfigByName
 
 fun Routing.configRouter() {
     val configRepository: ConfigRepository by inject()
+    val updateConfigByName: UpdateConfigByName by inject()
 
     get(CONFIG_PATH) {
         call.respond(HttpStatusCode.OK, configRepository.getConfigs())
@@ -25,7 +27,7 @@ fun Routing.configRouter() {
 
     put(CONFIG_PATH) {
         val param = call.receive<ConfigParam>()
-        configRepository.updateConfig(param)
+        updateConfigByName(param)
         call.respond(HttpStatusCode.OK, param)
     }
 }

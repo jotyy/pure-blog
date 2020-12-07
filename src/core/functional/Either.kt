@@ -1,4 +1,4 @@
-package top.jotyy.core.abstraction
+package core.functional
 
 import io.ktor.application.*
 import io.ktor.http.*
@@ -10,12 +10,12 @@ import io.ktor.util.pipeline.*
  *
  * @author Jotyy
  */
-sealed class Result<out T>
+sealed class Either<out T>
 
-class Success<out T>(val successData: T) : Result<T>()
-class Failure(val errorData: String) : Result<Nothing>()
+class Success<out T>(val successData: T) : Either<T>()
+class Failure(val errorData: String) : Either<Nothing>()
 
-inline fun <T> Result<T>.handle(
+inline fun <T> Either<T>.handle(
     successBlock: (T) -> Unit,
     failureBlock: (String) -> Unit
 ) {
@@ -25,14 +25,14 @@ inline fun <T> Result<T>.handle(
     }
 }
 
-inline fun <T> Result<T>.onSuccess(successBlock: (T) -> Unit): Result<T> {
+inline fun <T> Either<T>.onSuccess(successBlock: (T) -> Unit): Either<T> {
     if (this is Success)
         successBlock(successData)
 
     return this
 }
 
-inline fun <T> Result<T>.onError(errorBlock: (String) -> Unit): Result<T> {
+inline fun <T> Either<T>.onError(errorBlock: (String) -> Unit): Either<T> {
     if (this is Failure)
         errorBlock(errorData)
 
@@ -40,7 +40,7 @@ inline fun <T> Result<T>.onError(errorBlock: (String) -> Unit): Result<T> {
 }
 
 suspend fun <T> PipelineContext<Unit, ApplicationCall>.handleResult(
-    result: Result<T>,
+    result: Either<T>,
     successCode: HttpStatusCode = HttpStatusCode.OK,
     errorCode: HttpStatusCode = HttpStatusCode.ExpectationFailed
 ) {

@@ -2,7 +2,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val ktorVersion = "1.4.3"
-val kotlinVersion = "1.4.10"
+val kotlinVersion = "1.4.20"
 val logbackVersion ="1.2.1"
 val exposedVersion ="0.28.1"
 val hikariVersion ="3.4.5"
@@ -13,18 +13,14 @@ val valiktorVersion = "0.12.0"
 val junitVersion = "5.6.2"
 
 plugins {
-    application
-    kotlin("jvm") version "1.4.10"
+    base
+    kotlin("jvm") version "1.4.20"
     id("org.jetbrains.dokka") version "0.10.1"
     id("com.diffplug.gradle.spotless") version "4.5.1"
 }
 
 group = "top.jotyy"
 version = "0.0.1"
-
-application {
-    mainClassName = "io.ktor.server.netty.EngineMain"
-}
 
 repositories {
     mavenLocal()
@@ -34,6 +30,30 @@ repositories {
     maven("https://maven.aliyun.com/repository/jcenter")
     maven("https://kotlin.bintray.com/ktor")
 }
+
+subprojects {
+    group = "top.jotyy"
+    version = "0.0.1"
+
+    apply(plugin = "kotlin")
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    kotlin.sourceSets["main"].kotlin.srcDirs("src")
+    kotlin.sourceSets["test"].kotlin.srcDirs("test")
+
+    sourceSets["main"].resources.srcDirs("resources")
+    sourceSets["test"].resources.srcDirs("testresources")
+}
+
+kotlin.sourceSets["main"].kotlin.srcDirs("src")
+kotlin.sourceSets["test"].kotlin.srcDirs("test")
+
+sourceSets["main"].resources.srcDirs("resources")
+sourceSets["test"].resources.srcDirs("testresources")
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
@@ -84,10 +104,3 @@ tasks {
         kotlinOptions.jvmTarget = "1.8"
     }
 }
-
-
-kotlin.sourceSets["main"].kotlin.srcDirs("src")
-kotlin.sourceSets["test"].kotlin.srcDirs("test")
-
-sourceSets["main"].resources.srcDirs("resources")
-sourceSets["test"].resources.srcDirs("testresources")
