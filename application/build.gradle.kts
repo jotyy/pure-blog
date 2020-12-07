@@ -1,3 +1,7 @@
+val ktorVersion = "1.4.3"
+val logbackVersion = "1.2.1"
+val koinVersion = "2.1.6"
+
 plugins {
     application
     kotlin("jvm")
@@ -7,9 +11,7 @@ application {
     mainClassName = "io.ktor.server.netty.EngineMain"
 }
 
-val ktorVersion = "1.4.3"
-val logbackVersion = "1.2.1"
-val koinVersion = "2.1.6"
+sourceSets["main"].resources.srcDirs("resources")
 
 dependencies {
     implementation(kotlin("stdlib"))

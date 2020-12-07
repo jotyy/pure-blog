@@ -37,46 +37,37 @@ subprojects {
 
     apply(plugin = "kotlin")
 
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-
     kotlin.sourceSets["main"].kotlin.srcDirs("src")
     kotlin.sourceSets["test"].kotlin.srcDirs("test")
 
-    sourceSets["main"].resources.srcDirs("resources")
-    sourceSets["test"].resources.srcDirs("testresources")
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven("https://maven.aliyun.com/repository/public")
+        maven("https://maven.aliyun.com/repository/central")
+        maven("https://maven.aliyun.com/repository/jcenter")
+        maven("https://kotlin.bintray.com/ktor")
+    }
 }
-
-kotlin.sourceSets["main"].kotlin.srcDirs("src")
-kotlin.sourceSets["test"].kotlin.srcDirs("test")
-
-sourceSets["main"].resources.srcDirs("resources")
-sourceSets["test"].resources.srcDirs("testresources")
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
-    implementation("io.ktor:ktor-server-netty:$ktorVersion")
-    implementation("ch.qos.logback:logback-classic:$logbackVersion")
-    implementation("io.ktor:ktor-server-core:$ktorVersion")
-    implementation("io.ktor:ktor-auth:$ktorVersion")
-    implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
-    implementation("io.ktor:ktor-jackson:$ktorVersion")
-    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-jodatime:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
-    implementation("org.postgresql:postgresql:$postgresqlVersion")
-    implementation("org.koin:koin-ktor:$koinVersion")
-    implementation("com.zaxxer:HikariCP:$hikariVersion")
-    implementation("com.apurebase:kgraphql:$kGraphQLVersion")
-    implementation("com.apurebase:kgraphql-ktor:$kGraphQLVersion")
-    implementation("org.valiktor:valiktor-core:$valiktorVersion")
-    testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
-    testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
-    testImplementation("org.koin:koin-test:$koinVersion")
+    implementation(kotlin("stdlib"))
 }
+//    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
+//    implementation("io.ktor:ktor-server-netty:$ktorVersion")
+//    implementation("ch.qos.logback:logback-classic:$logbackVersion")
+//    implementation("io.ktor:ktor-server-core:$ktorVersion")
+//    implementation("io.ktor:ktor-auth:$ktorVersion")
+//    implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
+//
+//    implementation("org.koin:koin-ktor:$koinVersion")
+//    implementation("com.zaxxer:HikariCP:$hikariVersion")
+//    implementation("com.apurebase:kgraphql:$kGraphQLVersion")
+//    implementation("com.apurebase:kgraphql-ktor:$kGraphQLVersion")
+//    implementation("org.valiktor:valiktor-core:$valiktorVersion")
+//    testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
+//    testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
+//    testImplementation("org.koin:koin-test:$koinVersion")
 
 tasks.test {
     useJUnitPlatform()
