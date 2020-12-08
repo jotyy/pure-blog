@@ -1,5 +1,9 @@
 package top.jotyy.core.functional
 
+import kotlinx.coroutines.runBlocking
+import top.jotyy.core.functional.Either.Left
+import top.jotyy.core.functional.Either.Right
+
 /**
  * Represents a value of one of two possible types (a disjoint union).
  * Instances of [Either] are either an instance of [Left] or [Right].
@@ -100,3 +104,19 @@ fun <L, R> Either<L, R>.onFailure(fn: (failure: L) -> Unit): Either<L, R> =
  */
 fun <L, R> Either<L, R>.onSuccess(fn: (success: R) -> Unit): Either<L, R> =
     this.apply { if (this is Either.Right) fn(b) }
+
+/**
+ * Left-biased onAsyncFailure() FP convention dictates that when this class is Left, it'll perform
+ * the onFailure async functionality passed as a parameter, but, overall will still return an either
+ * object so you chain calls.
+ */
+fun <L, R> Either<L, R>.onAsyncFailure(fn: suspend (failure: L) -> Unit): Either<L, R> =
+    this.apply { if (this is Either.Left) runBlocking { fn(a) } }
+
+/**
+ * Right-biased onAsyncSuccess() FP convention dictates that when this class is Right, it'll perform
+ * the onSuccess async functionality passed as a parameter, but, overall will still return an either
+ * object so you chain calls.
+ */
+fun <L, R> Either<L, R>.onAsyncSuccess(fn: suspend (success: R) -> Unit): Either<L, R> =
+    this.apply { if (this is Either.Right) runBlocking { fn(b) } }

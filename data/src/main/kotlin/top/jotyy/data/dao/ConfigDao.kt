@@ -7,8 +7,8 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
 import org.joda.time.DateTime
 import top.jotyy.data.database.table.Configs
+import top.jotyy.data.model.Config
 import top.jotyy.data.model.request.ConfigRequest
-import top.jotyy.data.model.response.Config
 
 class ConfigDao {
     fun getAllConfigs() =

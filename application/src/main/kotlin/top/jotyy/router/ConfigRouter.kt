@@ -2,20 +2,21 @@ package top.jotyy.router
 
 import io.ktor.application.*
 import io.ktor.features.*
-import io.ktor.http.*
 import io.ktor.request.*
-import io.ktor.response.*
 import io.ktor.routing.*
-import kotlinx.coroutines.runBlocking
 import org.koin.ktor.ext.inject
 import top.jotyy.core.constants.FailureMessages
 import top.jotyy.core.constants.Router
-import top.jotyy.core.exception.Failure
-import top.jotyy.core.functional.onFailure
-import top.jotyy.core.functional.onSuccess
+import top.jotyy.core.functional.onAsyncFailure
+import top.jotyy.core.functional.onAsyncSuccess
 import top.jotyy.data.model.request.ConfigRequest
 import top.jotyy.domain.usecases.UpdateConfigByName
+import top.jotyy.extensions.respondFailure
+import top.jotyy.extensions.respondSuccess
 
+/**
+ * Configurations router
+ */
 fun Routing.configRouter() {
     val updateConfigByName by inject<UpdateConfigByName>()
 
@@ -27,15 +28,11 @@ fun Routing.configRouter() {
         }
 
         updateConfigByName(configRequest)
-            .onSuccess {
-                runBlocking {
-                    call.respond(HttpStatusCode.OK, "Success")
-                }
+            .onAsyncSuccess {
+                respondSuccess(it)
             }
-            .onFailure {
-                runBlocking {
-                    call.respond(HttpStatusCode.BadRequest, (it as Failure.FeatureFailure).message)
-                }
+            .onAsyncFailure {
+                respondFailure(it)
             }
     }
 }
