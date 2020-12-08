@@ -13,7 +13,7 @@ class UserDao {
         }.firstOrNull()
     }
 
-    fun addUser(userName: String, nickName: String?, password: String) = transaction {
+    fun addUser(userName: String, nickName: String? = null, password: String) = transaction {
         UserEntity.new {
             this.userName = userName
             this.nickName = nickName ?: userName
@@ -21,14 +21,15 @@ class UserDao {
         }
     }
 
-    fun updateUserById(userId: Int, userName: String?, nickName: String?, password: String?) = transaction {
-        UserEntity.findById(userId)
-            ?.apply {
-                this.userName = userName ?: this.userName
-                this.nickName = nickName ?: this.nickName
-                this.password = password ?: this.password
-            }
-    }
+    fun updateUserById(userId: Int, userName: String? = null, nickName: String? = null, password: String? = null) =
+        transaction {
+            UserEntity.findById(userId)
+                ?.apply {
+                    this.userName = userName ?: this.userName
+                    this.nickName = nickName ?: this.nickName
+                    this.password = password ?: this.password
+                }
+        }
 
     fun isUserExist(userId: Int) = transaction {
         UserEntity.findById(userId) != null
