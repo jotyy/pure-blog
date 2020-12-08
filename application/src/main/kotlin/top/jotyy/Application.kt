@@ -13,7 +13,8 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import org.koin.ktor.ext.Koin
 import top.jotyy.data.database.initDatabase
-import top.jotyy.di.configModule
+import top.jotyy.di.appModule
+import top.jotyy.router.appRouter
 import top.jotyy.router.configRouter
 
 fun main(args: Array<String>) {
@@ -27,7 +28,7 @@ fun Application.module() {
     initDatabase()
 
     install(Koin) {
-        modules(configModule)
+        modules(appModule)
     }
 
     install(CORS) {
@@ -55,6 +56,7 @@ fun Application.module() {
             call.respondText("✨Hello, I'm jotyy!", contentType = ContentType.Text.Plain)
         }
 
+        appRouter()
         configRouter()
 //        userRouter()
 //        tagRoute()

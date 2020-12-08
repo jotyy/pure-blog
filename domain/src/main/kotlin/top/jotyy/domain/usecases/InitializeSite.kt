@@ -1,6 +1,7 @@
 package top.jotyy.domain.usecases
 
 import org.valiktor.ConstraintViolationException
+import org.valiktor.functions.hasSize
 import org.valiktor.functions.isNotEmpty
 import org.valiktor.validate
 import top.jotyy.core.functional.Either
@@ -22,10 +23,10 @@ class InitializeSite(
 
     override fun run(request: InitializeSiteRequest) = try {
         validate(request) {
-            validate(InitializeSiteRequest::siteName).isNotEmpty()
+            validate(InitializeSiteRequest::siteName).hasSize(min = 2, max = 20)
             validate(InitializeSiteRequest::siteUrl).isNotEmpty()
-            validate(InitializeSiteRequest::userName).isNotEmpty()
-            validate(InitializeSiteRequest::password).isNotEmpty()
+            validate(InitializeSiteRequest::userName).hasSize(min = 2, max = 20)
+            validate(InitializeSiteRequest::password).hasSize(min = 6, max = 20)
         }
 
         userDao.addUser(userName = request.userName, password = request.password)

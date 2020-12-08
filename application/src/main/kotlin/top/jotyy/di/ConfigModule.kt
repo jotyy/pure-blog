@@ -2,14 +2,19 @@ package top.jotyy.di
 
 import org.koin.dsl.module
 import top.jotyy.data.dao.ConfigDao
+import top.jotyy.data.dao.UserDao
 import top.jotyy.domain.usecases.InitializeSite
 import top.jotyy.domain.usecases.UpdateConfigByName
 
 /**
- * Configurations dependencies module
+ * dependencies module
  */
-val configModule = module {
+val appModule = module {
+    // dao
     single { ConfigDao() }
+    single { UserDao() }
+
+    // use cases
     single { UpdateConfigByName(get()) }
-    single { InitializeSite(get()) }
+    single { InitializeSite(get(), get()) }
 }
