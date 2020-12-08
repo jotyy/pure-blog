@@ -1,3 +1,4 @@
+val ktorVersion = "1.4.3"
 val valiktorVersion = "0.12.0"
 val kotestVersion = "4.3.1"
 val mockkVersion = "1.10.3-jdk8"
@@ -10,6 +11,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(project(":core"))
     implementation(project(":data"))
+    implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
     implementation("org.valiktor:valiktor-core:$valiktorVersion")
 
     testImplementation("io.mockk:mockk:$mockkVersion")

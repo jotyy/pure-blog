@@ -10,6 +10,7 @@ import top.jotyy.core.interactor.UseCase
 import top.jotyy.data.dao.UserDao
 import top.jotyy.data.model.request.AuthRequest
 import top.jotyy.data.model.response.AuthResponse
+import top.jotyy.domain.auth.AppJWT
 import top.jotyy.domain.extensions.toFailure
 
 class Authenticate(
@@ -21,11 +22,11 @@ class Authenticate(
             validate(AuthRequest::username).hasSize(min = 2, max = 20)
             validate(AuthRequest::password).hasSize(min = 6, max = 20)
         }
-        val user = userDao.getUserByNameAndPassword(
+        userDao.getUserByNameAndPassword(
             request.username,
             request.password
         ) ?: throw UnauthorizedException()
-        Either.Right(AuthResponse(""))
+        Either.Right(AuthResponse(AppJWT.generateToken(request.username, request.password)))
     } catch (e: ConstraintViolationException) {
         Either.Left(e.toFailure())
     }

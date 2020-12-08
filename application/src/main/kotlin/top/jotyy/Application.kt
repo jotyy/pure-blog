@@ -3,6 +3,7 @@ package top.jotyy
 import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.application.*
 import io.ktor.auth.*
+import io.ktor.auth.jwt.*
 import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.jackson.*
@@ -14,6 +15,7 @@ import io.ktor.server.netty.*
 import org.koin.ktor.ext.Koin
 import top.jotyy.data.database.initDatabase
 import top.jotyy.di.appModule
+import top.jotyy.domain.auth.AppJWT
 import top.jotyy.router.appRouter
 import top.jotyy.router.configRouter
 
@@ -43,6 +45,9 @@ fun Application.module() {
     }
 
     install(Authentication) {
+        jwt {
+            verifier(AppJWT.makeJwtVerifier())
+        }
     }
 
     install(ContentNegotiation) {
