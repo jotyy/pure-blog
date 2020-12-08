@@ -11,10 +11,10 @@ application {
     mainClassName = "io.ktor.server.netty.EngineMain"
 }
 
-sourceSets["main"].resources.srcDirs("resources")
-
 dependencies {
     implementation(kotlin("stdlib"))
+    implementation(project(":core"))
+    implementation(project(":data"))
     implementation(project(":domain"))
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
@@ -23,5 +23,4 @@ dependencies {
     implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
     implementation("io.ktor:ktor-jackson:$ktorVersion")
     implementation("org.koin:koin-ktor:$koinVersion")
-    testImplementation("junit", "junit", "4.12")
 }

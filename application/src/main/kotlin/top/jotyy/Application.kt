@@ -11,8 +11,10 @@ import io.ktor.routing.get
 import io.ktor.routing.routing
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import org.koin.dsl.module
 import org.koin.ktor.ext.Koin
+import top.jotyy.data.database.initDatabase
+import top.jotyy.di.configModule
+import top.jotyy.router.configRouter
 
 fun main(args: Array<String>) {
     embeddedServer(
@@ -22,10 +24,10 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
-    initDB()
+    initDatabase()
 
     install(Koin) {
-        modules(appModule)
+        modules(configModule)
     }
 
     install(CORS) {
@@ -53,38 +55,9 @@ fun Application.module() {
             call.respondText("✨Hello, I'm jotyy!", contentType = ContentType.Text.Plain)
         }
 
-//        configRouter()
+        configRouter()
 //        userRouter()
 //        tagRoute()
 //        blogRoute()
     }
-}
-
-/**
- * DI
- */
-val appModule = module(createdAtStart = true) {
-//    single { ConfigDao() }
-//    single { UpdateConfigByName(get()) }
-//    single { ConfigRepository(get()) }
-}
-
-/**
- * Database Initialize
- */
-fun initDB() {
-//    val config = HikariConfig("/hikari.properties")
-//    config.schema = "pure-blog"
-//    Database.connect(HikariDataSource(config))
-//
-//    transaction {
-//        SchemaUtils.create(Users)
-//        SchemaUtils.create(Blogs)
-//        SchemaUtils.create(Categories)
-//        SchemaUtils.create(Tags)
-//        SchemaUtils.create(Configs)
-//        SchemaUtils.create(Comments)
-//        SchemaUtils.create(Links)
-//        SchemaUtils.create(Relations)
-//    }
 }

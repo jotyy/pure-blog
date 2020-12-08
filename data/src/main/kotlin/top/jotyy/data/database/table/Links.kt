@@ -1,4 +1,4 @@
-package top.jotyy.data.table
+package top.jotyy.data.database.table
 
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.jodatime.datetime

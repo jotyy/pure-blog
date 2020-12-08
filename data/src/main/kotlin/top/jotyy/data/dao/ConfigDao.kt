@@ -5,9 +5,9 @@ import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
 import org.joda.time.DateTime
+import top.jotyy.data.database.table.Configs
 import top.jotyy.data.model.Config
 import top.jotyy.data.params.ConfigParams
-import top.jotyy.data.table.Configs
 
 class ConfigDao {
     fun getAllConfigs() =
@@ -30,12 +30,11 @@ class ConfigDao {
         }
     }
 
-    fun updateConfig(param: ConfigParams) {
+    fun updateConfig(param: ConfigParams) =
         transaction {
             Configs.update({ Configs.name eq param.name }) {
                 it[value] = param.value
                 it[updatedAt] = DateTime()
             }
         }
-    }
 }

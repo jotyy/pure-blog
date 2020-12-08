@@ -9,3 +9,5 @@ abstract class UseCase<out Type, in Params> where Type : Any {
 
     operator fun invoke(params: Params) = run(params)
 }
+
+class None
