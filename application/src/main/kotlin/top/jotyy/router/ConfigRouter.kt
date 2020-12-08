@@ -10,23 +10,23 @@ import kotlinx.coroutines.runBlocking
 import org.koin.ktor.ext.inject
 import top.jotyy.core.constants.FailureMessages
 import top.jotyy.core.constants.Router
-import top.jotyy.core.exception.ConfigParamsException
+import top.jotyy.core.exception.Failure
 import top.jotyy.core.functional.onFailure
 import top.jotyy.core.functional.onSuccess
-import top.jotyy.data.params.ConfigParams
+import top.jotyy.data.model.request.ConfigRequest
 import top.jotyy.domain.usecases.UpdateConfigByName
 
 fun Routing.configRouter() {
     val updateConfigByName by inject<UpdateConfigByName>()
 
     put(Router.CONFIG_PATH) {
-        val params = runCatching {
-            call.receive<ConfigParams>()
+        val configRequest = runCatching {
+            call.receive<ConfigRequest>()
         }.getOrElse {
             throw BadRequestException(FailureMessages.CONFIG_PARAMS_ERROR)
         }
 
-        updateConfigByName(params)
+        updateConfigByName(configRequest)
             .onSuccess {
                 runBlocking {
                     call.respond(HttpStatusCode.OK, "Success")
@@ -34,7 +34,7 @@ fun Routing.configRouter() {
             }
             .onFailure {
                 runBlocking {
-                    call.respond(HttpStatusCode.BadRequest, (it as ConfigParamsException).msg)
+                    call.respond(HttpStatusCode.BadRequest, (it as Failure.FeatureFailure).message)
                 }
             }
     }

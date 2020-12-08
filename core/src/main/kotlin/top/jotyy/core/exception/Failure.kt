@@ -1,11 +1,10 @@
 package top.jotyy.core.exception
 
-import top.jotyy.core.constants.FailureMessages
-
 sealed class Failure {
     object GenericFailure : Failure()
 
-    abstract class FeatureFailure(val msg: String) : Failure()
+    abstract class FeatureFailure(val message: String) : Failure()
 }
 
-class ConfigParamsException : Failure.FeatureFailure(FailureMessages.CONFIG_PARAMS_ERROR)
+class ValidationFailure(message: String) : Failure.FeatureFailure(message)
+class NotFoundFailure(message: String? = "Not found") : Failure.FeatureFailure(message!!)
