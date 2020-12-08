@@ -5,7 +5,6 @@ import io.ktor.features.*
 import io.ktor.request.*
 import io.ktor.routing.*
 import org.koin.ktor.ext.inject
-import top.jotyy.core.constants.FailureMessages
 import top.jotyy.core.constants.Router
 import top.jotyy.core.functional.onAsyncFailure
 import top.jotyy.core.functional.onAsyncSuccess
@@ -24,7 +23,7 @@ fun Routing.configRouter() {
         val configRequest = runCatching {
             call.receive<ConfigRequest>()
         }.getOrElse {
-            throw BadRequestException(FailureMessages.CONFIG_PARAMS_ERROR)
+            throw BadRequestException("Request parameters error")
         }
 
         updateConfigByName(configRequest)

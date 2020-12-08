@@ -18,8 +18,8 @@ object Users : IntIdTable(name = "tb_admin_user") {
     val locked = integer("locked").default(0)
 }
 
-class User(id: EntityID<Int>) : IntEntity(id) {
-    companion object : IntEntityClass<User>(Users)
+class UserEntity(id: EntityID<Int>) : IntEntity(id) {
+    companion object : IntEntityClass<UserEntity>(Users)
 
     var userName by Users.userName
     var nickName by Users.nickName

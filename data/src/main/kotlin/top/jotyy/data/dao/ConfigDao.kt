@@ -22,19 +22,19 @@ class ConfigDao {
                 }
         }
 
-    fun addConfig(param: ConfigRequest) {
+    fun addConfig(configRequest: ConfigRequest) {
         transaction {
             Configs.insert {
-                it[name] = param.name
-                it[value] = param.value
+                it[name] = configRequest.name
+                it[value] = configRequest.value
             }
         }
     }
 
-    fun updateConfig(param: ConfigRequest) =
+    fun updateConfig(configRequest: ConfigRequest) =
         transaction {
-            Configs.update({ Configs.name eq param.name }) {
-                it[value] = param.value
+            Configs.update({ Configs.name eq configRequest.name }) {
+                it[value] = configRequest.value
                 it[updatedAt] = DateTime()
             }
         }

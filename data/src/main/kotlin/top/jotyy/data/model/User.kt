@@ -2,12 +2,7 @@ package top.jotyy.data.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 
-/**
- * User Entity
- *
- * @author Jotyy
- */
-data class UserModel(
+data class User(
     val userId: Int,
     val userName: String,
     val nickName: String,
