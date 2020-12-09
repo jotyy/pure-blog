@@ -1,0 +1,10 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+top.jotyy.data.dao
+top.jotyy.data.database
+top.jotyy.data.database.table
+top.jotyy.data.model
+top.jotyy.data.model.request
+top.jotyy.data.model.response
+

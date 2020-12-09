@@ -1,0 +1,8 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+top.jotyy
+top.jotyy.di
+top.jotyy.extensions
+top.jotyy.router
+

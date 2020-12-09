@@ -1,0 +1,7 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+top.jotyy.domain.auth
+top.jotyy.domain.extensions
+top.jotyy.domain.usecases
+

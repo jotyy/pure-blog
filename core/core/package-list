@@ -1,0 +1,9 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+top.jotyy.core.constants
+top.jotyy.core.exception
+top.jotyy.core.extensions
+top.jotyy.core.functional
+top.jotyy.core.interactor
+
