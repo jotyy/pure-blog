@@ -13,7 +13,7 @@ import top.jotyy.data.model.request.ConfigRequest
 import top.jotyy.domain.extensions.toFailure
 
 /**
- * Update site config by name
+ * UseCase of update configuration
  */
 class UpdateConfigByName(
     private val configDao: ConfigDao

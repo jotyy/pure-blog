@@ -14,7 +14,7 @@ import top.jotyy.data.model.request.InitializeSiteRequest
 import top.jotyy.domain.extensions.toFailure
 
 /**
- * Initialize site configuration
+ * UseCase of site initialization
  */
 class InitializeSite(
     private val configDao: ConfigDao,

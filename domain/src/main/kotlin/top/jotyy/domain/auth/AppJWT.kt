@@ -5,6 +5,9 @@ import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
 import java.util.*
 
+/**
+ * Application JWT manager
+ */
 object AppJWT {
     const val CLAIM_NAME = "name"
     const val CLAIM_PWD = "password"

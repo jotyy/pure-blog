@@ -13,6 +13,9 @@ import top.jotyy.data.model.response.AuthResponse
 import top.jotyy.domain.auth.AppJWT
 import top.jotyy.domain.extensions.toFailure
 
+/**
+ * UseCase for login authentication
+ */
 class Authenticate(
     private val userDao: UserDao
 ) : UseCase<AuthResponse, AuthRequest>() {
