@@ -1,4 +1,3 @@
-import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val ktorVersion = "1.4.3"
@@ -16,7 +15,7 @@ val junitVersion = "5.6.2"
 plugins {
     base
     kotlin("jvm") version "1.4.20"
-    id("org.jetbrains.dokka") version "0.10.1"
+    id("org.jetbrains.dokka") version "1.4.20"
     id("com.diffplug.gradle.spotless") version "4.5.1"
 }
 
@@ -37,6 +36,7 @@ subprojects {
     version = "0.0.1"
 
     apply(plugin = "kotlin")
+    apply(plugin = "org.jetbrains.dokka")
 
     repositories {
         mavenLocal()
@@ -80,9 +80,8 @@ spotless {
 }
 
 tasks {
-    withType<DokkaTask> {
-        outputFormat = "html"
-        outputDirectory = "$buildDir/dokka"
+    dokkaHtmlMultiModule.configure {
+        outputDirectory.set(buildDir.resolve("docs"))
     }
 
     withType<KotlinCompile>().configureEach {
