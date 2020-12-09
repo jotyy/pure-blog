@@ -11,9 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.6.8 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "pure-blog-jotyy" #Must be unique in Heroku
-          heroku_email: "jotyy318@gmail.com"
+      - uses: actions/checkout@v1
+
+      - name: Install Heroku CLI
+        run: curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+
+      - name: Deploy to Heroku
+        run: |
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email ${{ secrets.HEROKU_USER_EMAIL }}
+          echo "$HEROKU_AUTH" > ~/.netrc
+          heroku git:remote --app noty-api
+          git subtree push --prefix noty-api heroku master
+        env:
+          HEROKU_AUTH: ${{ secrets.HEROKU_AUTH }}
