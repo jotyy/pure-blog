@@ -18,6 +18,8 @@ jobs:
         run: chmod +x gradlew
       - name: Build documentation
         run: ./gradlew dokkaHtmlMultiModule --stacktrace
+      - name: Rename -modules.html to index.html
+        run: mv build/docs/-modules.html build/docs/index.html
       - name: Publish documentation
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
