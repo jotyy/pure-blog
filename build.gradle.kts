@@ -25,9 +25,6 @@ version = "0.0.1"
 repositories {
     mavenLocal()
     jcenter()
-    maven("https://maven.aliyun.com/repository/public")
-    maven("https://maven.aliyun.com/repository/central")
-    maven("https://maven.aliyun.com/repository/jcenter")
     maven("https://kotlin.bintray.com/ktor")
 }
 
@@ -41,9 +38,6 @@ subprojects {
     repositories {
         mavenLocal()
         jcenter()
-        maven("https://maven.aliyun.com/repository/public")
-        maven("https://maven.aliyun.com/repository/central")
-        maven("https://maven.aliyun.com/repository/jcenter")
         maven("https://kotlin.bintray.com/ktor")
     }
 
