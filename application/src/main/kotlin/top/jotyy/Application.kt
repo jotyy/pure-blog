@@ -16,6 +16,7 @@ import org.koin.ktor.ext.Koin
 import top.jotyy.data.database.initDatabase
 import top.jotyy.di.appModule
 import top.jotyy.domain.auth.AppJWT
+import top.jotyy.domain.auth.AuthPrincipal
 import top.jotyy.router.appRouter
 import top.jotyy.router.configRouter
 
@@ -47,6 +48,16 @@ fun Application.module() {
     install(Authentication) {
         jwt {
             verifier(AppJWT.makeJwtVerifier())
+            realm = "Pure Blog"
+            validate {
+                val userName = it.payload.getClaim(AppJWT.CLAIM_NAME).asString()
+                val password = it.payload.getClaim(AppJWT.CLAIM_PWD).asString()
+                if (userName != null && password != null) {
+                    AuthPrincipal(userName)
+                } else {
+                    null
+                }
+            }
         }
     }
 

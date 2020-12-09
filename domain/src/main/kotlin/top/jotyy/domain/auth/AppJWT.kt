@@ -6,9 +6,11 @@ import com.auth0.jwt.algorithms.Algorithm
 import java.util.*
 
 object AppJWT {
+    const val CLAIM_NAME = "name"
+    const val CLAIM_PWD = "password"
     private const val secret = "jotyy"
-    private const val issuer = "https://jotyy.top/"
-    private const val audience = ""
+    private const val issuer = "pure-blog"
+    private const val audience = "https://jotyy.top/"
     private const val VALIDITY_IN_MS = 36_000_00 * 24
     private val algorithm = Algorithm.HMAC256(secret)
 
@@ -18,12 +20,11 @@ object AppJWT {
             .withAudience(audience)
             .build()
 
-    fun generateToken(userName: String, password: String) = JWT.create()
-        .withSubject("Authentication")
-        .withIssuer(issuer)
+    fun generateToken(userName: String, password: String): String = JWT.create()
         .withAudience(audience)
-        .withClaim("name", userName)
-        .withClaim("password", password)
+        .withIssuer(issuer)
+        .withClaim(CLAIM_NAME, userName)
+        .withClaim(CLAIM_PWD, password)
         .withExpiresAt(getExpiration())
         .sign(algorithm)
 
