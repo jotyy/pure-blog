@@ -24,13 +24,5 @@ jobs:
       run: chmod +x gradlew
     - name: Check Code Style
       run: ./gradlew spotlessCheck
-    - name: Build documentation
-      run: ./gradlew dokkaHtmlMultiModule
-    - name: Public documentation
-      uses: JamesIves/github-pages-deploy-action@releases/v3
-      with:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: build/docs
     - name: Build with Gradle
       run: ./gradlew build
