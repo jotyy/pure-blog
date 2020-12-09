@@ -19,14 +19,14 @@ class Authenticate(
 
     override fun run(request: AuthRequest): Either<Failure, AuthResponse> = try {
         validate(request) {
-            validate(AuthRequest::username).hasSize(min = 2, max = 20)
+            validate(AuthRequest::userName).hasSize(min = 2, max = 20)
             validate(AuthRequest::password).hasSize(min = 6, max = 20)
         }
         userDao.getUserByNameAndPassword(
-            request.username,
+            request.userName,
             request.password
         ) ?: throw UnauthorizedException()
-        Either.Right(AuthResponse(AppJWT.generateToken(request.username, request.password)))
+        Either.Right(AuthResponse(AppJWT.generateToken(request.userName, request.password)))
     } catch (e: ConstraintViolationException) {
         Either.Left(e.toFailure())
     }

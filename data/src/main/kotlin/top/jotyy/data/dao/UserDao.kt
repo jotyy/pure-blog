@@ -7,9 +7,11 @@ import top.jotyy.data.database.table.Users
 
 class UserDao {
 
-    fun getUserByNameAndPassword(userName: String, password: String) = UserEntity.find {
-        (Users.userName eq userName) and (Users.password eq password)
-    }.firstOrNull()
+    fun getUserByNameAndPassword(userName: String, password: String) = transaction {
+        UserEntity.find {
+            (Users.userName eq userName) and (Users.password eq password)
+        }.firstOrNull()
+    }
 
     fun addUser(userName: String, nickName: String? = null, password: String) = transaction {
         UserEntity.new {

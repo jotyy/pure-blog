@@ -8,7 +8,9 @@ import org.koin.ktor.ext.inject
 import top.jotyy.core.constants.Router
 import top.jotyy.core.functional.onAsyncFailure
 import top.jotyy.core.functional.onAsyncSuccess
+import top.jotyy.data.model.request.AuthRequest
 import top.jotyy.data.model.request.InitializeSiteRequest
+import top.jotyy.domain.usecases.Authenticate
 import top.jotyy.domain.usecases.InitializeSite
 import top.jotyy.extensions.respondFailure
 import top.jotyy.extensions.respondSuccess
@@ -18,6 +20,7 @@ import top.jotyy.extensions.respondSuccess
  */
 fun Routing.appRouter() {
     val initializeSite by inject<InitializeSite>()
+    val authenticate by inject<Authenticate>()
 
     post(Router.INIT_PATH) {
         val request = runCatching {
@@ -35,5 +38,16 @@ fun Routing.appRouter() {
             }
     }
 
-    post(Router.LOGIN_PATH) {}
+    post(Router.LOGIN_PATH) {
+        val request = runCatching { call.receive<AuthRequest>() }
+            .getOrElse { throw BadRequestException("Request parameters error") }
+
+        authenticate(request)
+            .onAsyncSuccess {
+                respondSuccess(it)
+            }
+            .onAsyncFailure {
+                respondFailure(it)
+            }
+    }
 }
