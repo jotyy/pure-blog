@@ -1,4 +1,5 @@
 ![Pure Blog](https://github.com/jotyy/pure-blog/workflows/Pure%20Blog/badge.svg)
+![Docs](https://github.com/jotyy/pure-blog/workflows/Docs/badge.svg)
 ![Language](https://img.shields.io/badge/kotlin-100%25-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Activity](https://img.shields.io/github/last-commit/jotyy/pure-blog?color=orange&label=last-commit)
@@ -12,7 +13,7 @@
   <p align="center">
     Blog with Koltin only.
     <br />
-    <a href="https://github.com/github_username/repo"><strong>Explore the docs »</strong></a>
+    <a href="https://jotyy.github.io/pure-blog"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/jotyy/pure-blog">View Demo</a>
