@@ -21,7 +21,7 @@ jobs:
           git config --global user.name ${{ github.actor }}
           git config --global user.email ${{ secrets.HEROKU_USER_EMAIL }}
           echo "$HEROKU_AUTH" > ~/.netrc
-          heroku git:remote --app noty-api
-          git subtree push --prefix noty-api heroku master
+          heroku git:remote --app pure-blog-jotyy
+          git subtree push --prefix pure-blog-jotyy heroku master
         env:
           HEROKU_AUTH: ${{ secrets.HEROKU_AUTH }}
