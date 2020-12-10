@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val ktorVersion = "1.4.3"
-val kotlinVersion = "1.4.10"
+val kotlinVersion = "1.4.20"
 val logbackVersion = "1.2.1"
 val exposedVersion = "0.28.1"
 val hikariVersion = "3.4.5"
@@ -14,8 +14,8 @@ val junitVersion = "5.6.2"
 
 plugins {
     base
-    kotlin("jvm") version "1.4.10"
-    id("org.jetbrains.dokka") version "1.4.10"
+    kotlin("jvm") version "1.4.20"
+    id("org.jetbrains.dokka") version "1.4.20"
     id("com.diffplug.gradle.spotless") version "4.5.1"
 }
 
