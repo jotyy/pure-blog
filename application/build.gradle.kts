@@ -24,3 +24,7 @@ dependencies {
     implementation("io.ktor:ktor-jackson:$ktorVersion")
     implementation("org.koin:koin-ktor:$koinVersion")
 }
+
+task("stage") {
+    dependsOn("installDist")
+}

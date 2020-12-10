@@ -1,0 +1,8 @@
+{
+  "name": "Pure Blog",
+  "description": "A blog make with pure Kotlin.",
+  "image": "heroku/java",
+  "addon": [
+    "heroku-postgresql"
+  ]
+}
