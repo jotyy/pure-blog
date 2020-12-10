@@ -8,8 +8,6 @@ import top.jotyy.core.constants.LENGTH_50
 
 /**
  * User Table
- *
- * @author Jotyy
  */
 object Users : IntIdTable(name = "tb_admin_user") {
     val userName = varchar("login_user_name", LENGTH_50)

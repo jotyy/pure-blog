@@ -19,9 +19,14 @@ fun initDatabase(
         password = password
     )
 
-    val tables = arrayOf(Users, Blogs, Categories, Tags, Configs, Comments, Links, Relations)
-
     transaction {
-        SchemaUtils.createMissingTablesAndColumns(*tables)
+        SchemaUtils.createMissingTablesAndColumns(Users)
+        SchemaUtils.createMissingTablesAndColumns(Blogs)
+        SchemaUtils.createMissingTablesAndColumns(Categories)
+        SchemaUtils.createMissingTablesAndColumns(Tags)
+        SchemaUtils.createMissingTablesAndColumns(Configs)
+        SchemaUtils.createMissingTablesAndColumns(Comments)
+        SchemaUtils.createMissingTablesAndColumns(Links)
+        SchemaUtils.createMissingTablesAndColumns(Relations)
     }
 }
