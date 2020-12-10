@@ -10,3 +10,4 @@
 /domain/build
 /core/build
 .env
+/core/build/classes/
