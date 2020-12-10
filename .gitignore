@@ -9,3 +9,4 @@
 /data/build
 /domain/build
 /core/build
+.env
