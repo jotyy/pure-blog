@@ -28,7 +28,16 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
-    initDatabase()
+
+    with(AppConfig(environment.config)) {
+        initDatabase(
+            host = DATABASE_HOST,
+            port = DATABASE_PORT,
+            databaseName = DATABASE_NAME,
+            user = DATABASE_USER,
+            password = DATABASE_PASSWORD
+        )
+    }
 
     install(Koin) {
         modules(appModule)
@@ -74,8 +83,5 @@ fun Application.module() {
 
         appRouter()
         configRouter()
-//        userRouter()
-//        tagRoute()
-//        blogRoute()
     }
 }
