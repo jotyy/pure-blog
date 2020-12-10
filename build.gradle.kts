@@ -42,7 +42,7 @@ subprojects {
     }
 
     tasks.withType<KotlinCompile>().all {
-        version = JavaVersion.VERSION_1_8
+        version = "11"
     }
 
     tasks.withType<Test> {
@@ -79,6 +79,6 @@ tasks {
     }
 
     withType<KotlinCompile>().configureEach {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = "11"
     }
 }
