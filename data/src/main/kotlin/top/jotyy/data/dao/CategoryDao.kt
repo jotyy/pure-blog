@@ -7,5 +7,6 @@ import org.jetbrains.exposed.sql.transactions.transaction
  */
 class CategoryDao {
 
-    fun addCategory() = transaction { }
+    fun addCategory() = transaction {
+    }
 }

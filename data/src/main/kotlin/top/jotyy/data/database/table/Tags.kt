@@ -10,8 +10,6 @@ import top.jotyy.core.constants.LENGTH_100
 
 /**
  * Tag Table
- *
- * @author Jotyy
  */
 object Tags : IntIdTable(name = "tb_tag", columnName = "tag_id") {
     val name = varchar("tag_name", LENGTH_100)
