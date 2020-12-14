@@ -2,7 +2,6 @@ package top.jotyy.data.dao
 
 import org.jetbrains.exposed.sql.transactions.transaction
 import top.jotyy.data.database.table.TagEntity
-import top.jotyy.data.database.table.Tags
 
 /**
  * DAO of tags
@@ -26,7 +25,23 @@ class TagDao {
      * @param id tag id
      */
     fun deleteTag(id: Int) = transaction {
-        TagEntity.find { Tags.id eq id }
-            .first().delete()
+        TagEntity.findById(id)?.delete()
+    }
+
+    /**
+     * Update tag
+     *
+     * @param id tag id
+     * @param name tag name
+     */
+    fun updateTag(id: Int, name: String) = transaction {
+        TagEntity.findById(id)?.name = name
+    }
+
+    /**
+     * Get all tags
+     */
+    fun getTags() = transaction {
+        TagEntity.all()
     }
 }
