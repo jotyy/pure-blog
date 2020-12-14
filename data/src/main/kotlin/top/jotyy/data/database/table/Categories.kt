@@ -10,13 +10,12 @@ import top.jotyy.core.constants.LENGTH_50
 /**
  * Category Table
  */
-object Categories : IntIdTable("tb_category") {
+object Categories : IntIdTable(name = "tb_category", columnName = "category_id") {
     val name = varchar("category_name", LENGTH_50)
     val icon = varchar("category_icon", LENGTH_50)
     val rank = integer("category_rank")
     val isDeleted = integer("is_deleted").default(0)
     val createdAt = datetime("created_at")
-    override val primaryKey = PrimaryKey(id, name = "category_id")
 }
 
 class CategoryEntity(id: EntityID<Int>) : IntEntity(id) {
