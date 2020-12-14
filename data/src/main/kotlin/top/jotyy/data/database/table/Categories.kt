@@ -5,6 +5,7 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.jodatime.datetime
+import org.joda.time.DateTime
 import top.jotyy.core.constants.LENGTH_50
 
 /**
@@ -12,10 +13,10 @@ import top.jotyy.core.constants.LENGTH_50
  */
 object Categories : IntIdTable(name = "tb_category", columnName = "category_id") {
     val name = varchar("category_name", LENGTH_50).uniqueIndex()
-    val icon = varchar("category_icon", LENGTH_50)
-    val rank = integer("category_rank")
+    val icon = varchar("category_icon", LENGTH_50).nullable()
+    val rank = integer("category_rank").default(0)
     val isDeleted = integer("is_deleted").default(0)
-    val createdAt = datetime("created_at")
+    val createdAt = datetime("created_at").default(DateTime())
 }
 
 class CategoryEntity(id: EntityID<Int>) : IntEntity(id) {

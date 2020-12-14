@@ -18,6 +18,7 @@ import top.jotyy.di.appModule
 import top.jotyy.domain.auth.AppJWT
 import top.jotyy.domain.auth.AuthPrincipal
 import top.jotyy.router.appRouter
+import top.jotyy.router.blogRouter
 import top.jotyy.router.configRouter
 
 fun main(args: Array<String>) {
@@ -83,5 +84,6 @@ fun Application.module() {
 
         appRouter()
         configRouter()
+        blogRouter()
     }
 }

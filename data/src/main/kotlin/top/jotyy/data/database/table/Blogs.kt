@@ -19,7 +19,7 @@ object Blogs : IntIdTable(name = "tb_blog", columnName = "blog_id") {
     val content: Column<String> = text("blog_content")
     val categoryId = reference("blog_category_id", Categories.id).nullable()
     val categoryName = reference("blog_category_name", Categories.name).nullable()
-    val tags: Column<String> = varchar("blog_tags", LENGTH_200)
+    val tags = varchar("blog_tags", LENGTH_200).nullable()
     val status: Column<Int> = integer("blog_status").default(1)
     val views: Column<Int> = integer("blog_views").default(0)
     val enableComment: Column<Int> = integer("enable_comment").default(0)

@@ -1,7 +1,9 @@
 package top.jotyy.data.dao
 
 import org.jetbrains.exposed.sql.transactions.transaction
+import top.jotyy.data.database.table.Categories
 import top.jotyy.data.database.table.CategoryEntity
+import top.jotyy.data.model.response.CategoryResponse
 
 /**
  * Category DAO layer
@@ -14,10 +16,12 @@ class CategoryDao {
      * @param name category name
      * @param icon category icon path
      */
-    fun addCategory(name: String, icon: String) = transaction {
+    fun addCategory(name: String, icon: String? = null) = transaction {
         CategoryEntity.new {
             this.name = name
             this.icon = icon
+        }.let {
+            CategoryResponse.fromEntity(it)
         }
     }
 
@@ -41,7 +45,7 @@ class CategoryDao {
         CategoryEntity.findById(id)?.apply {
             this.name = name ?: this.name
             this.icon = icon ?: this.icon
-        }
+        }?.let { CategoryResponse.fromEntity(it) }
     }
 
     /**
@@ -51,13 +55,26 @@ class CategoryDao {
      * @param rank category rank
      */
     fun updateCategoryRankById(id: Int, rank: Int) = transaction {
-        CategoryEntity.findById(id)?.rank = rank
+        CategoryEntity.findById(id)?.apply {
+            this.rank = rank
+        }?.let { CategoryResponse.fromEntity(it) }
     }
 
     /**
      * Get all categories
      */
     fun getCategories() = transaction {
-        CategoryEntity.all()
+        CategoryEntity.all().toList()
+    }
+
+    /**
+     * Get category by name
+     *
+     * @param name Name of category
+     */
+    fun getCategoryByName(name: String): CategoryResponse? = transaction {
+        CategoryEntity.find {
+            Categories.name eq name
+        }.firstOrNull()?.let { CategoryResponse.fromEntity(it) }
     }
 }

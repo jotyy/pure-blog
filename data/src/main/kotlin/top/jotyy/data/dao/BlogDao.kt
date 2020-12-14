@@ -1,7 +1,10 @@
 package top.jotyy.data.dao
 
+import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.sql.transactions.transaction
 import top.jotyy.data.database.table.BlogEntity
+import top.jotyy.data.database.table.Categories
+import top.jotyy.data.model.response.BlogResponse
 
 /**
  * Blog DAO layer
@@ -25,8 +28,9 @@ class BlogDao {
         subUrl: String,
         coverImage: String?,
         content: String,
+        categoryId: Int?,
         categoryName: String?,
-        tags: Array<String>,
+        tags: String?,
         status: Int?,
         enableComment: Int?
     ) = transaction {
@@ -35,8 +39,9 @@ class BlogDao {
             this.subUrl = subUrl
             this.coverImage = coverImage
             this.content = content
+            this.categoryId = categoryId?.let { EntityID(it, Categories) }
             this.categoryName = categoryName
-            this.tags = tags.toString()
+            this.tags = tags
             this.status = status ?: 0
             this.enableComment = enableComment ?: 0
         }
@@ -71,7 +76,7 @@ class BlogDao {
         coverImage: String?,
         content: String?,
         categoryName: String?,
-        tags: Array<String>,
+        tags: String?,
         status: Int?,
         enableComment: Int?
     ) = transaction {
@@ -81,9 +86,21 @@ class BlogDao {
             this.coverImage = coverImage ?: this.coverImage
             this.content = content ?: this.content
             this.categoryName = categoryName ?: this.categoryName
-            this.tags = if (tags.isEmpty()) this.tags else tags.toString()
+            this.tags = tags ?: this.tags
             this.status = status ?: this.status
             this.enableComment = enableComment ?: this.enableComment
+        }
+    }
+
+    /**
+     * Get blogs
+     *
+     * @param limit num of query
+     * @param offset offset of first record
+     */
+    fun getBlogs(limit: Int = 10, offset: Long = 0L) = transaction {
+        BlogEntity.all().limit(limit, offset).map {
+            BlogResponse.fromEntity(it)
         }
     }
 
@@ -93,6 +110,6 @@ class BlogDao {
      * @param id blog id
      */
     fun getBlogById(id: Int) = transaction {
-        BlogEntity.findById(id)
+        BlogEntity.findById(id)?.let { BlogResponse.fromEntity(it) }
     }
 }
