@@ -1,5 +1,8 @@
 package top.jotyy.data.database.table
 
+import org.jetbrains.exposed.dao.IntEntity
+import org.jetbrains.exposed.dao.IntEntityClass
+import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.jodatime.datetime
 import top.jotyy.core.constants.LENGTH_100
@@ -23,5 +26,24 @@ object Comments : IntIdTable(name = "tb_comment", columnName = "comment_id") {
     val replyCreatedAt = datetime("reply_created_at")
     val commentStatus = integer("comment_status").default(0)
     val isDeleted = integer("is_deleted").default(0)
-    override val primaryKey = PrimaryKey(id, name = "comment_id")
+}
+
+/**
+ * Comment entity
+ */
+class CommentEntity(id: EntityID<Int>) : IntEntity(id) {
+    companion object : IntEntityClass<CommentEntity>(Comments)
+
+    var blogId by Comments.blogId
+    var commentator by Comments.commentator
+    var email by Comments.email
+    var websiteUrl by Comments.websiteUrl
+    var commentBody by Comments.commentBody
+    var commentBy by Comments.commentBy
+    var commentatorIp by Comments.commentatorIp
+    var commentCreatedAt by Comments.commentCreatedAt
+    var replyBody by Comments.replyBody
+    var replyCreatedAt by Comments.replyCreatedAt
+    var commentStatus by Comments.commentStatus
+    var isDeleted by Comments.isDeleted
 }
