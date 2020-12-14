@@ -11,7 +11,7 @@ import top.jotyy.core.constants.LENGTH_50
  * Category Table
  */
 object Categories : IntIdTable(name = "tb_category", columnName = "category_id") {
-    val name = varchar("category_name", LENGTH_50)
+    val name = varchar("category_name", LENGTH_50).uniqueIndex()
     val icon = varchar("category_icon", LENGTH_50)
     val rank = integer("category_rank")
     val isDeleted = integer("is_deleted").default(0)

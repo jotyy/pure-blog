@@ -1,25 +1,24 @@
 package top.jotyy.data.database.table
 
+import org.jetbrains.exposed.dao.IntEntity
+import org.jetbrains.exposed.dao.IntEntityClass
+import org.jetbrains.exposed.dao.id.EntityID
+import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Column
-import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.jodatime.datetime
 import org.joda.time.DateTime
 import top.jotyy.core.constants.LENGTH_200
-import top.jotyy.core.constants.LENGTH_50
 
 /**
  * Blog Table
- *
- * @author Jotyy
  */
-object Blogs : Table("tb_blog") {
-    val id: Column<Int> = integer("blog_id").autoIncrement()
+object Blogs : IntIdTable(name = "tb_blog", columnName = "blog_id") {
     val title: Column<String> = varchar("blog_title", LENGTH_200)
     val subUrl: Column<String> = varchar("blog_sub_url", LENGTH_200)
     val coverImage: Column<String> = varchar("blog_cover_image", LENGTH_200)
     val content: Column<String> = text("blog_content")
-    val categoryId: Column<Int> = integer("blog_category_id").default(0)
-    val categoryName: Column<String> = varchar("blog_category_name", LENGTH_50)
+    val categoryId = reference("blog_category_id", Categories.id)
+    val categoryName = reference("blog_category_name", Categories.name)
     val tags: Column<String> = varchar("blog_tags", LENGTH_200)
     val status: Column<Int> = integer("blog_status").default(1)
     val views: Column<Int> = integer("blog_views").default(0)
@@ -27,5 +26,25 @@ object Blogs : Table("tb_blog") {
     val isDeleted: Column<Int> = integer("is_deleted").default(0)
     val createdAt: Column<DateTime> = datetime("created_at").default(DateTime.now())
     val updatedAt = datetime("updated_at").default(DateTime.now())
-    override val primaryKey = PrimaryKey(id, name = "blog_id")
+}
+
+/**
+ * Blog Entity
+ */
+class BlogEntity(id: EntityID<Int>) : IntEntity(id) {
+    companion object : IntEntityClass<BlogEntity>(Blogs)
+
+    var title by Blogs.title
+    var subUrl by Blogs.subUrl
+    var coverImage by Blogs.coverImage
+    var content by Blogs.content
+    var categoryId by Blogs.categoryId
+    var categoryName by Blogs.categoryName
+    var tags by Blogs.tags
+    var status by Blogs.status
+    var views by Blogs.views
+    var enableComment by Blogs.enableComment
+    var isDeleted by Blogs.isDeleted
+    var createdAt by Blogs.createdAt
+    var updatedAt by Blogs.updatedAt
 }
