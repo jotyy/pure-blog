@@ -6,7 +6,7 @@ import top.jotyy.data.database.table.UserEntity
 import top.jotyy.data.database.table.Users
 
 /**
- * DAO of users
+ * User DAO layer
  */
 class UserDao {
 

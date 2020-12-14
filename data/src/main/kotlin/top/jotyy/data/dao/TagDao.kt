@@ -4,7 +4,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import top.jotyy.data.database.table.TagEntity
 
 /**
- * DAO of tags
+ * Tag DAO layer
  */
 class TagDao {
 

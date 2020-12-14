@@ -15,10 +15,10 @@ import top.jotyy.core.constants.LENGTH_200
 object Blogs : IntIdTable(name = "tb_blog", columnName = "blog_id") {
     val title: Column<String> = varchar("blog_title", LENGTH_200)
     val subUrl: Column<String> = varchar("blog_sub_url", LENGTH_200)
-    val coverImage: Column<String> = varchar("blog_cover_image", LENGTH_200)
+    val coverImage = varchar("blog_cover_image", LENGTH_200).nullable()
     val content: Column<String> = text("blog_content")
-    val categoryId = reference("blog_category_id", Categories.id)
-    val categoryName = reference("blog_category_name", Categories.name)
+    val categoryId = reference("blog_category_id", Categories.id).nullable()
+    val categoryName = reference("blog_category_name", Categories.name).nullable()
     val tags: Column<String> = varchar("blog_tags", LENGTH_200)
     val status: Column<Int> = integer("blog_status").default(1)
     val views: Column<Int> = integer("blog_views").default(0)

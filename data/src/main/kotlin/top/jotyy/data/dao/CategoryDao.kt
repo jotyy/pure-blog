@@ -4,7 +4,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import top.jotyy.data.database.table.CategoryEntity
 
 /**
- * Dao of categories
+ * Category DAO layer
  */
 class CategoryDao {
 
