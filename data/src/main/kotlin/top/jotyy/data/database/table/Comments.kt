@@ -5,6 +5,7 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.jodatime.datetime
+import org.joda.time.DateTime
 import top.jotyy.core.constants.LENGTH_100
 import top.jotyy.core.constants.LENGTH_20
 import top.jotyy.core.constants.LENGTH_200
@@ -20,10 +21,10 @@ object Comments : IntIdTable(name = "tb_comment", columnName = "comment_id") {
     val websiteUrl = varchar("website_url", LENGTH_50)
     val commentBody = varchar("comment_body", LENGTH_200)
     val commentBy = varchar("comment_by", LENGTH_50)
-    val commentCreatedAt = datetime("comment_created_at")
+    val commentCreatedAt = datetime("comment_created_at").default(DateTime())
     val commentatorIp = varchar("commentator_ip", LENGTH_20)
     val replyBody = varchar("reply_body", LENGTH_200)
-    val replyCreatedAt = datetime("reply_created_at")
+    val replyCreatedAt = datetime("reply_created_at").default(DateTime())
     val commentStatus = integer("comment_status").default(0)
     val isDeleted = integer("is_deleted").default(0)
 }
