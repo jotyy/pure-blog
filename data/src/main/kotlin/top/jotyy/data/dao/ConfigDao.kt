@@ -8,9 +8,15 @@ import org.jetbrains.exposed.sql.update
 import org.joda.time.DateTime
 import top.jotyy.data.database.table.Configs
 import top.jotyy.data.model.Config
-import top.jotyy.data.model.request.ConfigRequest
 
+/**
+ * Config DAO layer
+ */
 class ConfigDao {
+
+    /**
+     * Get all configs
+     */
     fun getAllConfigs() =
         transaction {
             Configs.selectAll()
@@ -22,23 +28,40 @@ class ConfigDao {
                 }
         }
 
-    fun addConfig(configRequest: ConfigRequest) {
+    /**
+     * Add config
+     *
+     * @param name config name
+     * @param value config value
+     */
+    fun addConfig(name: String, value: String) {
         transaction {
             Configs.insert {
-                it[name] = configRequest.name
-                it[value] = configRequest.value
+                it[this.name] = name
+                it[this.value] = value
             }
         }
     }
 
-    fun updateConfig(configRequest: ConfigRequest) =
+    /**
+     * Update config
+     *
+     * @param name config name
+     * @param value config value
+     */
+    fun updateConfig(name: String, value: String) =
         transaction {
-            Configs.update({ Configs.name eq configRequest.name }) {
-                it[value] = configRequest.value
+            Configs.update({ Configs.name eq name }) {
+                it[this.value] = value
                 it[updatedAt] = DateTime()
             }
         }
 
+    /**
+     * If config exist
+     *
+     * @param name config name
+     */
     fun isExist(name: String) =
         transaction {
             Configs.select {

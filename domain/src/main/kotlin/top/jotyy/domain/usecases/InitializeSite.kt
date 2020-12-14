@@ -9,7 +9,6 @@ import top.jotyy.core.interactor.None
 import top.jotyy.core.interactor.UseCase
 import top.jotyy.data.dao.ConfigDao
 import top.jotyy.data.dao.UserDao
-import top.jotyy.data.model.request.ConfigRequest
 import top.jotyy.data.model.request.InitializeSiteRequest
 import top.jotyy.domain.extensions.toFailure
 
@@ -30,8 +29,8 @@ class InitializeSite(
         }
 
         userDao.addUser(userName = request.userName, password = request.password)
-        configDao.addConfig(ConfigRequest("site_name", request.siteName))
-        configDao.addConfig(ConfigRequest("site_url", request.siteUrl))
+        configDao.addConfig("site_name", request.siteName)
+        configDao.addConfig("site_url", request.siteUrl)
 
         Either.Right(None())
     } catch (e: ConstraintViolationException) {

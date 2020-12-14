@@ -26,7 +26,7 @@ class UpdateConfigByName(
         }
         checkConfigExistOrThrowException(request.name)
 
-        configDao.updateConfig(request)
+        configDao.updateConfig(request.name, request.value)
         Either.Right(None())
     } catch (e: ConstraintViolationException) {
         Either.Left(e.toFailure())
