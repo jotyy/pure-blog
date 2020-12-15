@@ -77,4 +77,13 @@ class CategoryDao {
             Categories.name eq name
         }.firstOrNull()?.let { CategoryResponse.fromEntity(it) }
     }
+
+    /**
+     * Check if category is exist
+     *
+     * @param id Category id
+     */
+    fun isCategoryExist(id: Int) = transaction {
+        CategoryEntity.findById(id) != null
+    }
 }

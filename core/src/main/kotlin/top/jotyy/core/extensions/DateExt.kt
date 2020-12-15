@@ -4,7 +4,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun String.toDate(format: String = "yyyy-MM-dd HH:mm:ss"): Date? {
+fun String.toDate(format: String = "yyyy-MM-dd HH:mm:ss:SSS"): Date? {
     val dateFormatter = SimpleDateFormat(format, Locale.US)
     return try {
         dateFormatter.parse(this)
@@ -13,7 +13,7 @@ fun String.toDate(format: String = "yyyy-MM-dd HH:mm:ss"): Date? {
     }
 }
 
-fun Date.toFormatString(format: String = "yyyy-MM-dd HH:mm:ss"): String {
+fun Date.toFormatString(format: String = "yyyy-MM-dd HH:mm:ss:SSS"): String {
     val dateFormatter = SimpleDateFormat(format, Locale.US)
     return dateFormatter.format(this)
 }

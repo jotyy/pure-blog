@@ -1,6 +1,7 @@
 package top.jotyy.data.model.response
 
 import org.joda.time.DateTime
+import top.jotyy.core.extensions.toFormatString
 import top.jotyy.data.database.table.BlogEntity
 
 data class BlogResponse(
@@ -15,8 +16,8 @@ data class BlogResponse(
     val blogStatus: Int,
     val blogViews: Int,
     val enableComment: Int,
-    val createdAt: DateTime,
-    val updatedAt: DateTime
+    val createdAt: String,
+    val updatedAt: String
 ) {
     companion object {
         fun fromEntity(entity: BlogEntity) = BlogResponse(
@@ -31,8 +32,8 @@ data class BlogResponse(
             blogStatus = entity.status,
             blogViews = entity.views,
             enableComment = entity.enableComment,
-            createdAt = entity.createdAt,
-            updatedAt = entity.updatedAt
+            createdAt = entity.createdAt.toDate().toFormatString(),
+            updatedAt = entity.updatedAt.toDate().toFormatString()
         )
     }
 }
