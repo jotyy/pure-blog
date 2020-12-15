@@ -23,4 +23,5 @@ val appModule = module {
     single { InitializeSite(get(), get()) }
     single { PostBlog(get(), get()) }
     single { FetchBlogs(get()) }
+    single { DeleteBlog(get()) }
 }

@@ -16,7 +16,7 @@ object Tags : IntIdTable(name = "tb_tag", columnName = "tag_id") {
     val isDeleted = integer("is_deleted")
         .default(0)
     val createdAt = datetime("created_at")
-        .default(DateTime.now())
+        .default(DateTime())
 }
 
 class TagEntity(id: EntityID<Int>) : IntEntity(id) {
