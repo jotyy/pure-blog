@@ -4,6 +4,8 @@ import org.valiktor.ConstraintViolationException
 import org.valiktor.functions.hasSize
 import org.valiktor.validate
 import top.jotyy.core.exception.Failure
+import top.jotyy.core.exception.NotFoundException
+import top.jotyy.core.exception.NotFoundFailure
 import top.jotyy.core.functional.Either
 import top.jotyy.core.interactor.None
 import top.jotyy.core.interactor.UseCase
@@ -27,16 +29,15 @@ class PostBlog(
                 validate(PostBlogRequest::coverImage).hasSize(min = 0, max = 20)
                 validate(PostBlogRequest::content).hasSize(min = 1)
             }
-            val categoryId = request.categoryName?.let { name ->
-                categoryDao.getCategoryByName(name)?.categoryId
-                    ?: categoryDao.addCategory(name).categoryId
-            }
+
+            checkIfCategoryExistOrThrowException(request.categoryId)
+
             blogDao.addBlog(
                 title = request.title,
                 subUrl = request.subUrl,
                 coverImage = request.coverImage,
                 content = request.content,
-                categoryId = categoryId,
+                categoryId = request.categoryId,
                 categoryName = request.categoryName,
                 tags = if (request.tags.isNullOrEmpty()) null else request.tags.toString(),
                 status = request.status,
@@ -45,6 +46,16 @@ class PostBlog(
             return Either.Right(None())
         } catch (e: ConstraintViolationException) {
             return Either.Left(e.toFailure())
+        } catch (e: NotFoundException) {
+            return Either.Left(NotFoundFailure(e.message))
+        }
+    }
+
+    private fun checkIfCategoryExistOrThrowException(categoryId: Int?) {
+        categoryId?.let {
+            if (!categoryDao.isCategoryExist(it)) {
+                throw NotFoundException(item = "category")
+            }
         }
     }
 }

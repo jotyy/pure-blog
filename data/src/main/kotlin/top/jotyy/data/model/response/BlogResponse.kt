@@ -1,6 +1,5 @@
 package top.jotyy.data.model.response
 
-import org.joda.time.DateTime
 import top.jotyy.core.extensions.toFormatString
 import top.jotyy.data.database.table.BlogEntity
 

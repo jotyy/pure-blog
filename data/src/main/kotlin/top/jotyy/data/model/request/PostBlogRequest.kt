@@ -5,6 +5,7 @@ data class PostBlogRequest(
     val subUrl: String,
     val coverImage: String?,
     val content: String,
+    val categoryId: Int?,
     val categoryName: String?,
     val tags: List<String>?,
     val status: Int?,
