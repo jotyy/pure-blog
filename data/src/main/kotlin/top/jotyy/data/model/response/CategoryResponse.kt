@@ -8,7 +8,7 @@ data class CategoryResponse(
     val categoryName: String,
     val categoryIcon: String?,
     val categoryRank: Int,
-    val createdAt: DateTime,
+    val createdAt: DateTime
 ) {
 
     companion object {
