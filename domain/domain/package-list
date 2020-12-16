@@ -2,6 +2,9 @@ $dokka.format:html-v1
 $dokka.linkExtension:html
 
 top.jotyy.domain.auth
+top.jotyy.domain.domain.auth
+top.jotyy.domain.domain.blog
 top.jotyy.domain.extensions
-top.jotyy.domain.usecases
+top.jotyy.domain.usecases.category
+top.jotyy.domain.usecases.config
 
