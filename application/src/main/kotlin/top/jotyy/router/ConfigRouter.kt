@@ -9,7 +9,7 @@ import top.jotyy.core.constants.Router
 import top.jotyy.core.functional.onAsyncFailure
 import top.jotyy.core.functional.onAsyncSuccess
 import top.jotyy.data.model.request.ConfigRequest
-import top.jotyy.domain.usecases.UpdateConfigByName
+import top.jotyy.domain.usecases.config.UpdateConfigUseCase
 import top.jotyy.extensions.respondFailure
 import top.jotyy.extensions.respondSuccess
 
@@ -17,7 +17,7 @@ import top.jotyy.extensions.respondSuccess
  * Configurations router
  */
 fun Routing.configRouter() {
-    val updateConfigByName by inject<UpdateConfigByName>()
+    val updateConfigByName by inject<UpdateConfigUseCase>()
 
     put(Router.CONFIG_PATH) {
         val configRequest = runCatching {

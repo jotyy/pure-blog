@@ -10,8 +10,8 @@ import top.jotyy.core.functional.onAsyncFailure
 import top.jotyy.core.functional.onAsyncSuccess
 import top.jotyy.data.model.request.AuthRequest
 import top.jotyy.data.model.request.InitializeSiteRequest
-import top.jotyy.domain.usecases.Authenticate
-import top.jotyy.domain.usecases.InitializeSite
+import top.jotyy.domain.domain.auth.AuthUseCase
+import top.jotyy.domain.usecases.config.InitializeSiteUseCase
 import top.jotyy.extensions.respondFailure
 import top.jotyy.extensions.respondSuccess
 
@@ -19,8 +19,8 @@ import top.jotyy.extensions.respondSuccess
  * Application global interfaces
  */
 fun Routing.appRouter() {
-    val initializeSite by inject<InitializeSite>()
-    val authenticate by inject<Authenticate>()
+    val initializeSite by inject<InitializeSiteUseCase>()
+    val authenticate by inject<AuthUseCase>()
 
     post(Router.INIT_PATH) {
         val request = runCatching {

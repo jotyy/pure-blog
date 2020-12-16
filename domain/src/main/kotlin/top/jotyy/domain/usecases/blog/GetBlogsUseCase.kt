@@ -1,4 +1,4 @@
-package top.jotyy.domain.usecases
+package top.jotyy.domain.domain.blog
 
 import top.jotyy.core.exception.Failure
 import top.jotyy.core.exception.NotFoundException
@@ -12,7 +12,7 @@ import top.jotyy.data.model.response.BlogResponse
 /**
  * Fetch all blogs
  */
-class FetchBlogs(
+class GetBlogsUseCase(
     private val blogDao: BlogDao
 ) : UseCase<List<BlogResponse>, FetchBlogsRequest>() {
     override fun run(request: FetchBlogsRequest): Either<Failure, List<BlogResponse>> =

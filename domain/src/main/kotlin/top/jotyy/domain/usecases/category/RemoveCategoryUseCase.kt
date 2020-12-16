@@ -1,4 +1,4 @@
-package top.jotyy.domain.usecases
+package top.jotyy.domain.usecases.category
 
 import top.jotyy.core.exception.Failure
 import top.jotyy.core.exception.NotFoundException
@@ -6,22 +6,25 @@ import top.jotyy.core.exception.NotFoundFailure
 import top.jotyy.core.functional.Either
 import top.jotyy.core.interactor.None
 import top.jotyy.core.interactor.UseCase
-import top.jotyy.data.dao.BlogDao
+import top.jotyy.data.dao.CategoryDao
 
 /**
- * Delete blog
+ * Remove category
  */
-class DeleteBlog(
-    private val blogDao: BlogDao
+class RemoveCategoryUseCase(
+    private val categoryDao: CategoryDao
 ) : UseCase<None, Int>() {
     override fun run(request: Int): Either<Failure, None> = try {
-        if (blogDao.getBlogById(request) != null) {
-            blogDao.deleteBlog(request)
-        } else {
-            throw NotFoundException(item = "blog")
-        }
+        checkIfCategoryExistOrThrowException(request)
+        categoryDao.deleteCategory(request)
         Either.Right(None())
     } catch (e: NotFoundException) {
         Either.Left(NotFoundFailure(e.message))
+    }
+
+    private fun checkIfCategoryExistOrThrowException(id: Int) {
+        if (!categoryDao.isCategoryExist(id)) {
+            throw NotFoundException("category")
+        }
     }
 }

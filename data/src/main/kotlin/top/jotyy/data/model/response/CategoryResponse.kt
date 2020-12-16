@@ -1,6 +1,6 @@
 package top.jotyy.data.model.response
 
-import org.joda.time.DateTime
+import top.jotyy.core.extensions.toFormatString
 import top.jotyy.data.database.table.CategoryEntity
 
 data class CategoryResponse(
@@ -8,7 +8,7 @@ data class CategoryResponse(
     val categoryName: String,
     val categoryIcon: String?,
     val categoryRank: Int,
-    val createdAt: DateTime
+    val createdAt: String
 ) {
 
     companion object {
@@ -17,7 +17,7 @@ data class CategoryResponse(
             categoryName = entity.name,
             categoryIcon = entity.icon,
             categoryRank = entity.rank,
-            createdAt = entity.createdAt
+            createdAt = entity.createdAt.toDate().toFormatString()
         )
     }
 }

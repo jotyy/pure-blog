@@ -1,4 +1,4 @@
-package top.jotyy.domain.usecases
+package top.jotyy.domain.domain.blog
 
 import org.valiktor.ConstraintViolationException
 import org.valiktor.functions.hasSize
@@ -17,7 +17,7 @@ import top.jotyy.domain.extensions.toFailure
 /**
  * Post a new blog
  */
-class PostBlog(
+class PostBlogUseCase(
     private val blogDao: BlogDao,
     private val categoryDao: CategoryDao
 ) : UseCase<None, PostBlogRequest>() {

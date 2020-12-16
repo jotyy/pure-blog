@@ -11,10 +11,10 @@ import top.jotyy.core.functional.onAsyncSuccess
 import top.jotyy.data.model.request.FetchBlogsRequest
 import top.jotyy.data.model.request.PostBlogRequest
 import top.jotyy.data.model.request.UpdateBlogRequest
-import top.jotyy.domain.usecases.DeleteBlog
-import top.jotyy.domain.usecases.FetchBlogs
-import top.jotyy.domain.usecases.PostBlog
-import top.jotyy.domain.usecases.UpdateBlog
+import top.jotyy.domain.domain.blog.RemoveBlogUseCase
+import top.jotyy.domain.domain.blog.GetBlogsUseCase
+import top.jotyy.domain.domain.blog.PostBlogUseCase
+import top.jotyy.domain.domain.blog.UpdateBlogUseCase
 import top.jotyy.extensions.respondFailure
 import top.jotyy.extensions.respondSuccess
 
@@ -22,10 +22,10 @@ import top.jotyy.extensions.respondSuccess
  * Blog routers
  */
 fun Routing.blogRouter() {
-    val postBlog by inject<PostBlog>()
-    val deleteBlog by inject<DeleteBlog>()
-    val updateBlog by inject<UpdateBlog>()
-    val fetchBlogs by inject<FetchBlogs>()
+    val postBlog by inject<PostBlogUseCase>()
+    val deleteBlog by inject<RemoveBlogUseCase>()
+    val updateBlog by inject<UpdateBlogUseCase>()
+    val fetchBlogs by inject<GetBlogsUseCase>()
 
     post(Router.BLOG_PATH) {
         val request = runCatching {

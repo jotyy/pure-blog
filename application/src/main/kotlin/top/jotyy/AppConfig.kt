@@ -8,8 +8,6 @@ import io.ktor.config.*
  */
 @Suppress("PropertyName")
 class AppConfig constructor(config: ApplicationConfig) {
-    val SECRET_KEY = config.property("key.secret").getString()
-
     val DATABASE_HOST = config.property("database.host").getString()
     val DATABASE_PORT = config.property("database.port").getString()
     val DATABASE_NAME = config.property("database.name").getString()
