@@ -5,7 +5,7 @@ import org.valiktor.functions.hasSize
 import org.valiktor.validate
 import top.jotyy.core.exception.Failure
 import top.jotyy.core.exception.NotFoundException
-import top.jotyy.core.exception.NotFoundFailure
+import top.jotyy.core.exception.toFailure
 import top.jotyy.core.functional.Either
 import top.jotyy.core.interactor.None
 import top.jotyy.core.interactor.UseCase
@@ -21,7 +21,7 @@ class PostBlogUseCase(
     private val blogDao: BlogDao,
     private val categoryDao: CategoryDao
 ) : UseCase<None, PostBlogRequest>() {
-    override fun run(request: PostBlogRequest): Either<Failure, None> {
+    override fun run(request: PostBlogRequest): Either<Failure, None> =
         try {
             validate(request) {
                 validate(PostBlogRequest::title).hasSize(min = 1, max = 20)
@@ -43,13 +43,12 @@ class PostBlogUseCase(
                 status = request.status,
                 enableComment = request.enableComment
             )
-            return Either.Right(None())
-        } catch (e: ConstraintViolationException) {
-            return Either.Left(e.toFailure())
-        } catch (e: NotFoundException) {
-            return Either.Left(NotFoundFailure(e.message))
+            Either.Right(None())
+        } catch (cve: ConstraintViolationException) {
+            Either.Left(cve.toFailure())
+        } catch (nfe: NotFoundException) {
+            Either.Left(nfe.toFailure())
         }
-    }
 
     private fun checkIfCategoryExistOrThrowException(categoryId: Int?) {
         categoryId?.let {

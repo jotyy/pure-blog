@@ -2,7 +2,7 @@ package top.jotyy.domain.usecases.category
 
 import top.jotyy.core.exception.Failure
 import top.jotyy.core.exception.NotFoundException
-import top.jotyy.core.exception.NotFoundFailure
+import top.jotyy.core.exception.toFailure
 import top.jotyy.core.functional.Either
 import top.jotyy.core.interactor.None
 import top.jotyy.core.interactor.UseCase
@@ -18,8 +18,8 @@ class RemoveCategoryUseCase(
         checkIfCategoryExistOrThrowException(request)
         categoryDao.deleteCategory(request)
         Either.Right(None())
-    } catch (e: NotFoundException) {
-        Either.Left(NotFoundFailure(e.message))
+    } catch (nfe: NotFoundException) {
+        Either.Left(nfe.toFailure())
     }
 
     private fun checkIfCategoryExistOrThrowException(id: Int) {

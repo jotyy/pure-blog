@@ -5,7 +5,7 @@ import org.valiktor.functions.hasSize
 import org.valiktor.validate
 import top.jotyy.core.exception.Failure
 import top.jotyy.core.exception.NotFoundException
-import top.jotyy.core.exception.NotFoundFailure
+import top.jotyy.core.exception.toFailure
 import top.jotyy.core.functional.Either
 import top.jotyy.core.interactor.UseCase
 import top.jotyy.data.dao.BlogDao
@@ -44,10 +44,10 @@ class UpdateBlogUseCase(
             enableComment = request.enableComment
         )
         Either.Right(response!!)
-    } catch (e: ConstraintViolationException) {
-        Either.Left(e.toFailure())
-    } catch (e: NotFoundException) {
-        Either.Left(NotFoundFailure(e.message))
+    } catch (cve: ConstraintViolationException) {
+        Either.Left(cve.toFailure())
+    } catch (nfe: NotFoundException) {
+        Either.Left(nfe.toFailure())
     }
 
     private fun checkIfCategoryExistOrThrowException(categoryId: Int?) {

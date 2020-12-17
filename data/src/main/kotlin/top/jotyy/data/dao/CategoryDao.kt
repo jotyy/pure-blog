@@ -79,6 +79,15 @@ class CategoryDao {
     }
 
     /**
+     * Check if category name available
+     *
+     * @param name Category name
+     */
+    fun isCategoryNameAvailable(name: String) = transaction {
+        CategoryEntity.find { Categories.name eq name }.firstOrNull() != null
+    }
+
+    /**
      * Check if category is exist
      *
      * @param id Category id

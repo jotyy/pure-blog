@@ -5,6 +5,7 @@ import org.valiktor.functions.hasSize
 import org.valiktor.validate
 import top.jotyy.core.exception.Failure
 import top.jotyy.core.exception.UnauthorizedException
+import top.jotyy.core.exception.toFailure
 import top.jotyy.core.functional.Either
 import top.jotyy.core.interactor.UseCase
 import top.jotyy.data.dao.UserDao
@@ -30,7 +31,9 @@ class AuthUseCase(
             request.password
         ) ?: throw UnauthorizedException()
         Either.Right(AuthResponse(AppJWT.generateToken(request.userName, request.password)))
-    } catch (e: ConstraintViolationException) {
-        Either.Left(e.toFailure())
+    } catch (cve: ConstraintViolationException) {
+        Either.Left(cve.toFailure())
+    } catch (uae: UnauthorizedException) {
+        Either.Left(uae.toFailure())
     }
 }
