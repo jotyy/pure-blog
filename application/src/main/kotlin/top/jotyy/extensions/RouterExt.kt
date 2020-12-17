@@ -4,10 +4,7 @@ import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.util.pipeline.*
-import top.jotyy.core.exception.Failure
-import top.jotyy.core.exception.NotFoundFailure
-import top.jotyy.core.exception.UnauthorizedFailure
-import top.jotyy.core.exception.ValidationFailure
+import top.jotyy.core.exception.*
 
 /**
  * Simplify success response function
@@ -24,4 +21,5 @@ suspend fun PipelineContext<Unit, ApplicationCall>.respondFailure(failure: Failu
     is ValidationFailure -> call.respond(HttpStatusCode.BadRequest, failure.message)
     is NotFoundFailure -> call.respond(HttpStatusCode.NotFound, failure.message)
     is UnauthorizedFailure -> call.respond(HttpStatusCode.Unauthorized, failure.message)
+    is AlreadUsedFailure -> call.respond(HttpStatusCode.Forbidden, failure.message)
 }
