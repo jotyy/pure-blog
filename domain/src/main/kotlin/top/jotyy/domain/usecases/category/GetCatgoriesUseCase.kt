@@ -7,15 +7,15 @@ import top.jotyy.core.functional.Either
 import top.jotyy.core.interactor.None
 import top.jotyy.core.interactor.UseCase
 import top.jotyy.data.dao.CategoryDao
-import top.jotyy.data.database.table.CategoryEntity
+import top.jotyy.data.model.response.CategoryResponse
 
 /**
  * Get all categories
  */
 class GetCatgoriesUseCase(
     private val categoryDao: CategoryDao
-) : UseCase<List<CategoryEntity>, None>() {
-    override fun run(request: None): Either<Failure, List<CategoryEntity>> = try {
+) : UseCase<List<CategoryResponse>, None>() {
+    override fun run(request: None): Either<Failure, List<CategoryResponse>> = try {
         val response = categoryDao.getCategories()
         if (response.isEmpty()) {
             throw NotFoundException("categories")

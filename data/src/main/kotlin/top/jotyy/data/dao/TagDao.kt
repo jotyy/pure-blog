@@ -2,6 +2,7 @@ package top.jotyy.data.dao
 
 import org.jetbrains.exposed.sql.transactions.transaction
 import top.jotyy.data.database.table.TagEntity
+import top.jotyy.data.model.response.TagResponse
 
 /**
  * Tag DAO layer
@@ -43,6 +44,7 @@ class TagDao {
      */
     fun getTags() = transaction {
         TagEntity.all()
+            .map { TagResponse.fromEntity(it) }
     }
 
     /**

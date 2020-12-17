@@ -64,7 +64,8 @@ class CategoryDao {
      * Get all categories
      */
     fun getCategories() = transaction {
-        CategoryEntity.all().toList()
+        CategoryEntity.all()
+            .map { CategoryResponse.fromEntity(it) }
     }
 
     /**
