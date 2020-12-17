@@ -7,4 +7,5 @@ top.jotyy.domain.domain.blog
 top.jotyy.domain.extensions
 top.jotyy.domain.usecases.category
 top.jotyy.domain.usecases.config
+top.jotyy.domain.usecases.tag
 
