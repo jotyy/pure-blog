@@ -44,4 +44,11 @@ class TagDao {
     fun getTags() = transaction {
         TagEntity.all()
     }
+
+    /**
+     * Check if tag exist
+     */
+    fun isTagExist(id: Int) = transaction {
+        TagEntity.findById(id) != null
+    }
 }
