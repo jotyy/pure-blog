@@ -2,8 +2,6 @@ name: Deploy
 
 on:
   push:
-    paths:
-      - 'pure-blog-backend/**'
     branches:
       - master
 

@@ -5,12 +5,8 @@ name: Pure Blog
 
 on:
   push:
-    paths:
-      - 'pure-blog-backend/**'
     branches: [ master ]
   pull_request:
-    paths:
-      - 'pure-blog-backend/**'
     branches: [ master ]
 
 jobs:
