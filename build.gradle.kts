@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 val ktorVersion = "1.4.3"
 val kotlinVersion = "1.4.20"
@@ -11,12 +12,11 @@ val kGraphQLVersion = "0.16.0"
 val valiktorVersion = "0.12.0"
 val junitVersion = "5.6.2"
 
-
 plugins {
     base
     kotlin("jvm") version "1.4.20"
     id("org.jetbrains.dokka") version "1.4.20"
-    id("com.diffplug.spotless") version "5.8.2"
+    id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
 }
 
 group = "top.jotyy"
@@ -64,13 +64,11 @@ tasks.withType<Test> {
     }
 }
 
-spotless {
-    kotlin {
-        target("**/*.kt")
-        ktlint("0.40.0")
-            .userData(mapOf("disabled_rules" to "no-wildcard-imports"))
-        trimTrailingWhitespace()
-        endWithNewline()
+ktlint {
+    outputToConsole.set(true)
+    reporters {
+        reporter(ReporterType.PLAIN)
+        reporter(ReporterType.CHECKSTYLE)
     }
 }
 
