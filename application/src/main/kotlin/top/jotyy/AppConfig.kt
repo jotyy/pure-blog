@@ -1,6 +1,6 @@
-package top.jotyy.app
+package top.jotyy
 
-import io.ktor.config.*
+import io.ktor.config.ApplicationConfig
 
 /**
  * Class containing Configuration values or secret key which will be provided from

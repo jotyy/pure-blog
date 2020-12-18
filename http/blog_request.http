@@ -1,0 +1,32 @@
+### post new blog
+POST http://{{host}}/api/v1/blogs
+Content-Type: application/json
+
+{
+  "title":"This is title",
+  "subUrl":"testblog",
+  "content":"This is content.",
+  "categoryName": "kotlin"
+}
+
+### update blog
+PUT http://{{host}}/api/v1/blogs/16
+Content-Type: application/json
+
+{
+  "title":"This is new title",
+  "subUrl":"newtestblog",
+  "content":"This is new content.",
+  "categoryName": "kotlin"
+}
+
+### get all blogs
+GET http://{{host}}/api/v1/blogs
+Accept: application/json
+
+### delete blog
+DELETE http://{{host}}/api/v1/blogs/15
+Accept: application/json
+
+
+###
