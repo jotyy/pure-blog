@@ -16,7 +16,7 @@ plugins {
     base
     kotlin("jvm") version "1.4.20"
     id("org.jetbrains.dokka") version "1.4.20"
-    id("com.diffplug.gradle.spotless") version "4.5.1"
+    id("com.diffplug.spotless") version "5.8.2"
 }
 
 group = "top.jotyy"
@@ -67,7 +67,8 @@ tasks.withType<Test> {
 spotless {
     kotlin {
         target("**/*.kt")
-        ktlint().userData(mapOf("disabled_rules" to "no-wildcard-imports"))
+        ktlint("0.40.0")
+            .userData(mapOf("disabled_rules" to "no-wildcard-imports"))
         trimTrailingWhitespace()
         endWithNewline()
     }
