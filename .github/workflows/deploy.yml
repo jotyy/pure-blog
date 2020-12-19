@@ -17,3 +17,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pure-blog-backend" #Must be unique in Heroku
           heroku_email: "jotyy318@gmail.com"
+          appdir: "pure-blog-backend"

@@ -19,7 +19,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build documentation
-        run: ./gradlew dokkaHtmlMultiModule --stacktrace
+        run: ./pure-blog-backend/gradlew dokkaHtmlMultiModule --stacktrace
       - name: Rename -modules.html to index.html
         run: mv build/docs/-modules.html build/docs/index.html
       - name: Publish documentation

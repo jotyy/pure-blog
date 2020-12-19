@@ -27,6 +27,6 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Check Code Style
-      run: ./gradlew ktlintCheck
+      run: ./pure-blog-backend/gradlew ktlintCheck
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./pure-blog-backend/gradlew build
