@@ -4,8 +4,6 @@ on:
   push:
     paths:
       - 'pure-blog-backend/**'
-    branches:
-      - master
 
 jobs:
   build:
