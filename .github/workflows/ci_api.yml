@@ -23,7 +23,7 @@ jobs:
       with:
         java-version: 11
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      run: chmod +x pure-blog-backend/gradlew
     - name: Check Code Style
       run: ./pure-blog-backend/gradlew ktlintCheck
     - name: Build with Gradle

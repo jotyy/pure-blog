@@ -20,10 +20,10 @@ jobs:
       - name: Build documentation
         run: ./pure-blog-backend/gradlew dokkaHtmlMultiModule --stacktrace
       - name: Rename -modules.html to index.html
-        run: mv build/docs/-modules.html build/docs/index.html
+        run: mv pure-blog-backend/build/docs/-modules.html pure-blog-backend/build/docs/index.html
       - name: Publish documentation
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build/docs
+          FOLDER: pure-blog-backend/build/docs
