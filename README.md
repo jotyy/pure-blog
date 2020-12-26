@@ -102,7 +102,3 @@ Jotyy - email
 
 Project Link: [https://github.com/jotyy/pure-blog](https://github.com/jotyy/pure-blog)
 
-
-
-## Acknowledgements
-* []()
